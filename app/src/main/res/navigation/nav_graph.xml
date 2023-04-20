@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.cryptocurrency.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/marketFragment"
+        android:name="com.example.cryptocurrency.fragments.MarketFragment"
+        android:label="fragment_market"
+        tools:layout="@layout/fragment_market" />
+    <fragment
+        android:id="@+id/portfolioFragment"
+        android:name="com.example.cryptocurrency.fragments.PortfolioFragment"
+        android:label="fragment_watchlist"
+        tools:layout="@layout/fragment_portfolio" />
+    <fragment
+        android:id="@+id/topGainersFragment"
+        android:name="com.example.cryptocurrency.fragments.TopGainersFragment"
+        android:label="fragment_top_gainers"
+        tools:layout="@layout/fragment_top_gainers" />
+    <fragment
+        android:id="@+id/topLosersFragment"
+        android:name="com.example.cryptocurrency.fragments.TopLosersFragment"
+        android:label="fragment_top_losers"
+        tools:layout="@layout/fragment_top_losers" />
+    <fragment
+        android:id="@+id/cryptoChartDetailFragment"
+        android:name="com.example.cryptocurrency.fragments.CryptoChartDetailFragment"
+        android:label="fragment_crypto_chart_detail"
+        tools:layout="@layout/fragment_crypto_chart_detail" />
+    <fragment
+        android:id="@+id/addTransactionFragment"
+        android:name="com.example.cryptocurrency.fragments.AddTransactionFragment"
+        android:label="fragment_add_transaction"
+        tools:layout="@layout/fragment_add_transaction" />
+    <fragment
+        android:id="@+id/transactionAmountFragment"
+        android:name="com.example.cryptocurrency.fragments.TransactionAmountFragment"
+        android:label="fragment_transaction_amount"
+        tools:layout="@layout/fragment_transaction_amount" />
+    <fragment
+        android:id="@+id/geckoFragment"
+        android:name="com.example.cryptocurrency.fragments.GeckoFragment"
+        android:label="fragment_gecko"
+        tools:layout="@layout/fragment_gecko" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.cryptocurrency.fragments.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/nftsFragment"
+        android:name="com.example.cryptocurrency.fragments.NftsFragment"
+        android:label="fragment_nfts"
+        tools:layout="@layout/fragment_nfts" />
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.example.cryptocurrency.fragments.NewsDetailsFragment"
+        android:label="fragment_news_details"
+        tools:layout="@layout/fragment_news_details" />
+    <fragment
+        android:id="@+id/blockSpanDetailFragment"
+        android:name="com.example.cryptocurrency.fragments.BlockSpanDetailFragment"
+        android:label="fragment_block_span_detail"
+        tools:layout="@layout/fragment_block_span_detail" />
+</navigation>

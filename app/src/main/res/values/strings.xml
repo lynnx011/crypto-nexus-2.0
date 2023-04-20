@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Crypto Nexus</string>
+    <string name="home">Home</string>
+    <string name="market">Market</string>
+    <string name="watchlist">Portfolio</string>
+    <string name="crypto_currency">Crypto Currency</string>
+    <string name="toolbar_title">Crypto Gecko</string>
+    <string name="search_on_market">Search On Market</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="usd_converter">USD Converter</string>
+    <string name="currency_converter">Currency Converter</string>
+    <string name="add_trans">Add Transaction</string>
+    <string name="portfolio">Main Portfolio</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="crypto_news">Crypto News</string>
+    <string name="total_supply">Total Supply</string>
+    <string name="total_volume">Total Volume</string>
+    <string name="block_span_api_key">sUnkWjd1DZ0vFcNQ6fy8ujbHg1TwR2qH</string>
+    <string name="apiKey1">d09431fd-f23b-4168-860e-7719f7e39a82</string>
+    <string name="apiKey2">f059a4b0-effc-487f-8c09-7f27cbf4bad8</string>
+    <string name="apiKey3">2b53289e-58e4-4b65-97ba-3f2d2730a1c0</string>
+    <string name="apiKey4">8325f802-cd31-4b54-8760-9d198a80c712</string>
+    <string name="apiKey5">d51efec3-0ccc-49a2-8417-c82cf24b4ddd</string>
+    <string name="apiKey6">d1847b16-720d-4e8f-b02e-00c5d5c6d8cc</string>
+    <!--    <style name="api_test">https://pro-api.coinmarketcap.com/v2/tools/price-conversion?amount=10&symbol=BTC&convert=USD</style>-->
+</resources>

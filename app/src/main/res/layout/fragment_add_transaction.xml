@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.AddTransactionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_grey"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp">
+
+            <ImageView
+                android:id="@+id/backKey"
+                android:layout_width="34dp"
+                android:layout_height="30dp"
+                android:padding="2dp"
+                android:src="@drawable/left_arrow"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.04"
+                android:paddingStart="10dp"
+                android:text="@string/add_trans"
+                android:fontFamily="@font/josefin_sans_regular"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:ignore="UselessLeaf">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/searchCard"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="8dp"
+                app:cardElevation="40dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:drawableStart="@drawable/search_24"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/josefin_sans_regular"
+                    android:hint="Search"
+                    android:letterSpacing="0.04"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+            </androidx.cardview.widget.CardView>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    tools:listitem="@layout/transaction_item" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/noConnection"
+                    android:layout_width="200dp"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/no_connection" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/addTransCircular"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/assistagro_loading_bars" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

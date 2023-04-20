@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="trans"
+            type="com.example.cryptocurrency.model.transaction.TransactionModel" />
+
+        <variable
+            name="crypto"
+            type="com.example.cryptocurrency.model.USD" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/dark_grey"
+        app:cardElevation="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="horizontal"
+            tools:ignore="DisableBaselineAlignment,UselessLeaf">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:outlineSpotShadowColor="@color/dark_grey"
+                        app:cardCornerRadius="250dp"
+                        app:cardElevation="20dp">
+
+                        <ImageView
+                            android:id="@+id/logo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ethereum"
+                            tools:ignore="ContentDescription" />
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="6dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/token"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.02"
+                            android:padding="2dp"
+                            android:fontFamily="@font/josefin_sans_regular"
+                            android:text="@{trans.name}"
+                            android:textColor="@color/grey5"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/symbol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.02"
+                            android:padding="2dp"
+                            android:text="@{trans.symbol}"
+                            android:fontFamily="@font/josefin_sans_regular"
+                            android:textColor="@color/grey4"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:letterSpacing="0.02"
+                    android:padding="2dp"
+                    android:fontFamily="@font/josefin_sans_regular"
+                    android:textColor="@color/grey5"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:formatTransDouble="@{trans.current_price}" />
+
+                <TextView
+                    android:id="@+id/percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:letterSpacing="0.02"
+                    android:padding="2dp"
+                    android:fontFamily="@font/josefin_sans_regular"
+                    android:textColor="@color/grey4"
+                    android:textSize="14sp"
+                    app:formatTransDouble="@{trans.percent_change}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:letterSpacing="0.04"
+                    android:padding="2dp"
+                    android:textColor="@color/grey5"
+                    android:fontFamily="@font/josefin_sans_regular"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:formatTransDouble="@{trans.usd_amount}" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.02"
+                        android:padding="2dp"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:text="@{trans.symbol}"
+                        android:textColor="@color/grey2"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.02"
+                        android:padding="2dp"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:textColor="@color/grey4"
+                        android:textSize="14sp"
+                        app:formatTransaction="@{trans.token_amount}" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
