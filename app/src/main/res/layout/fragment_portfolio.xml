@@ -50,6 +50,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/current"
                 android:layout_width='wrap_content'
                 android:layout_height="wrap_content"
                 android:text="Current Balance"
@@ -197,6 +198,13 @@
             android:layout_marginTop="12dp"
             android:paddingBottom="66dp"
             tools:listitem="@layout/holding_item"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"/>
     </LinearLayout>
 
 </LinearLayout>

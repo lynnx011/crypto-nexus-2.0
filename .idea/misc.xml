@@ -42,6 +42,7 @@
         <entry key="..\:/CryptoCurrency/app/src/main/res/layout/top_losers_item.xml" value="0.19895833333333332" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/layout/transaction_item.xml" value="0.2" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/menu/bottom_menu.xml" value="0.18" />
+        <entry key="..\:/CryptoCurrency/app/src/main/res/xml/firebase_remote_config_defaults.xml" value="0.2" />
       </map>
     </option>
   </component>
