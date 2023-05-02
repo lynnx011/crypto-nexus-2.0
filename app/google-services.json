@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "379775360567",
-    "project_id": "crypto-currency-84bc0",
-    "storage_bucket": "crypto-currency-84bc0.appspot.com"
+    "project_number": "1020819251913",
+    "project_id": "crypto-nexus",
+    "storage_bucket": "crypto-nexus.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:379775360567:android:87106687f8176e3e4069b2",
+        "mobilesdk_app_id": "1:1020819251913:android:d684da856a8629b4eca318",
         "android_client_info": {
           "package_name": "com.example.cryptocurrency"
         }
       },
       "oauth_client": [
         {
-          "client_id": "379775360567-n576cei1ge7087nrdc4gomqgsb58u7mg.apps.googleusercontent.com",
+          "client_id": "1020819251913-3t977mpf28pneij7g70g3vqsubobcoj3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cryptocurrency",
+            "certificate_hash": "129364512d7017595d0e74a9d8f6eb2fe4a1e5df"
+          }
+        },
+        {
+          "client_id": "1020819251913-6q5irugkm62pfhb14i5lpca0laoubv01.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA7uzz55jHixszbjHLc01Hyt9osR2UavBQ"
+          "current_key": "AIzaSyASzvpPXRMpDu7sSjW0ecHYNZR-NY8-Eug"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "379775360567-n576cei1ge7087nrdc4gomqgsb58u7mg.apps.googleusercontent.com",
+              "client_id": "1020819251913-6q5irugkm62pfhb14i5lpca0laoubv01.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

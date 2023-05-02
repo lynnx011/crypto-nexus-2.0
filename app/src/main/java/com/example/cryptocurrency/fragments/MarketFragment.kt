@@ -130,7 +130,7 @@ class MarketFragment : Fragment() {
                 putString("dominanceMarket", quote.market_cap_dominance.toString())
                 putString("volume24h", quote.volume_24h.toString())
             }
-            findNavController().navigate(R.id.cryptoChartDetailFragment, bundle)
+            findNavController().navigate(R.id.action_marketFragment_to_cryptoChartDetailFragment, bundle)
         }
     }
 

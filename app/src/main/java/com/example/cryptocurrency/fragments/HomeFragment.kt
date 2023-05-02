@@ -78,8 +78,10 @@ class HomeFragment : Fragment() {
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                handler.removeCallbacks(runnable)
-                handler.postDelayed(runnable,4000)
+                handler.apply {
+                    removeCallbacks(runnable)
+                    postDelayed(runnable,4000)
+                }
             }
         })
 
@@ -156,7 +158,7 @@ class HomeFragment : Fragment() {
                 putString("dominanceMarket",quote.market_cap_dominance.toString())
                 putString("volume24h",quote.volume_24h.toString())
             }
-            findNavController().navigate(R.id.cryptoChartDetailFragment,bundle)
+            findNavController().navigate(R.id.action_homeFragment_to_cryptoChartDetailFragment,bundle)
         }
     }
 
@@ -174,13 +176,15 @@ class HomeFragment : Fragment() {
 
     private fun setupImageSlider(){
         imageList = ArrayList()
-        imageList.add(R.drawable.ai_cloud_with_robot_face)
-        imageList.add(R.drawable.cryptocurrency_bitcoin)
-        imageList.add(R.drawable.gradient_collage)
-        imageList.add(R.drawable.ai_cloud_concept_with_robot_head)
-        imageList.add(R.drawable.gradient_ai_cloud_with_broken_pieces)
-        imageList.add(R.drawable.ai_cloud_concept_with_robot_face)
-        imageList.add(R.drawable.ai_cloud_concept_with_robot_arm)
+        imageList.apply {
+            add(R.drawable.ai_cloud_with_robot_face)
+            add(R.drawable.cryptocurrency_bitcoin)
+            add(R.drawable.gradient_collage)
+            add(R.drawable.ai_cloud_concept_with_robot_head)
+            add(R.drawable.gradient_ai_cloud_with_broken_pieces)
+            add(R.drawable.ai_cloud_concept_with_robot_face)
+            add(R.drawable.ai_cloud_concept_with_robot_arm)
+        }
         viewPager = binding.viewPager
         imageSliderAdapter = ImageSliderAdapter(viewPager,imageList)
         viewPager.apply {
@@ -201,6 +205,5 @@ class HomeFragment : Fragment() {
         }
         viewPager.setPageTransformer(transformer)
     }
-
 
 }

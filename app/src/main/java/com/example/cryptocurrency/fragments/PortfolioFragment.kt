@@ -1,5 +1,4 @@
 package com.example.cryptocurrency.fragments
-
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -61,24 +59,7 @@ class PortfolioFragment : Fragment() {
             }
 
         binding.addAsset.setOnClickListener {
-            findNavController().navigate(R.id.addTransactionFragment)
-        }
-
-        binding.hideBtn.setOnClickListener {
-            binding.apply {
-                balance.isVisible = true
-                hideBtn.isVisible = false
-                showBtn.isVisible = true
-                unseen.isVisible = false
-            }
-        }
-        binding.showBtn.setOnClickListener {
-            binding.apply {
-                balance.isVisible = false
-                hideBtn.isVisible = true
-                showBtn.isVisible = false
-                unseen.isVisible = true
-            }
+            findNavController().navigate(R.id.action_portfolioFragment_to_addTransactionFragment)
         }
 
         remoteConfig = FirebaseRemoteConfig.getInstance()
@@ -94,22 +75,17 @@ class PortfolioFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun fetchRemoteParams() {
-        binding.balance.text = "$" + remoteConfig.getString("current_balance")
-        binding.lottie.setAnimationFromJson(remoteConfig.getString("lottie_anim"), "lottie")
-        binding.lottie.setFailureListener { throwable ->
-            Log.d("exception", throwable.toString())
-        }
         remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
             if (task.isSuccessful) {
+//                binding.balance.text = "$" + remoteConfig.getString("current_balance")
+//                binding.lottie.setAnimationFromJson(remoteConfig.getString("lottie_anim"), "lottie")
+                binding.lottie.setFailureListener { throwable ->
+                    Log.d("config", throwable.toString())
+                }
                 val updated = task.result
                 Log.d("config", "updated $updated")
-                Toast.makeText(
-                    requireContext(),
-                    "fetching and activating succeeded",
-                    Toast.LENGTH_SHORT
-                ).show()
             } else {
-                Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show()
+                Log.d("config","failed")
             }
         }
     }

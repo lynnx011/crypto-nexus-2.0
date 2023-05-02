@@ -20,14 +20,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class TopLosersFragment : Fragment() {
     private lateinit var binding: FragmentTopLosersBinding
     private lateinit var losersAdapter: TopGainersAdapter
-    private val networkDetector  by lazy { context?.let { NetworkDetector(it) } }
+    private val networkDetector by lazy { context?.let { NetworkDetector(it) } }
     private val losersViewModel: CryptoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_top_losers,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_top_losers, container, false)
         return binding.root
     }
 
@@ -37,10 +37,10 @@ class TopLosersFragment : Fragment() {
         binding.loserCircular.isVisible = true
         losersRecyclerView()
 
-        networkDetector?.observe(viewLifecycleOwner){ isConnected ->
-            if (isConnected){
-                losersViewModel.topGainersLosersLiveData.observe(viewLifecycleOwner){ cryptos ->
-                    if (cryptos != null){
+        networkDetector?.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                losersViewModel.topGainersLosersLiveData.observe(viewLifecycleOwner) { cryptos ->
+                    if (cryptos != null) {
                         val topLosers = cryptos.sortedBy {
                             it.quote.USD.percent_change_24h
                         }.take(100)
@@ -56,32 +56,37 @@ class TopLosersFragment : Fragment() {
             val bundle = Bundle()
             val quote = crypto.quote.USD
             bundle.apply {
-                putString("symbol",crypto.symbol)
-                putString("id",crypto.id.toString())
-                putString("name",crypto.name)
+                putString("symbol", crypto.symbol)
+                putString("id", crypto.id.toString())
+                putString("name", crypto.name)
                 putString("price", quote.price.toString())
-                putString("change24h",quote.percent_change_24h.toString())
-                putString("change7d",quote.percent_change_7d.toString())
-                putString("change30d",quote.percent_change_30d.toString())
-                putString("change60d",quote.percent_change_60d.toString())
-                putString("change90d",quote.percent_change_90d.toString())
-                putString("rank",crypto.cmc_rank.toString())
-                putString("marketCap",quote.market_cap.toString())
-                putString("maxSupply",crypto.max_supply.toString())
-                putString("cSupply",crypto.circulating_supply.toString())
-                putString("totalSupply",crypto.total_supply.toString())
-                putString("marketPair",crypto.num_market_pairs.toString())
-                putString("dilutedMarket",quote.fully_diluted_market_cap.toString())
-                putString("dominanceMarket",quote.market_cap_dominance.toString())
-                putString("volume24h",quote.volume_24h.toString())
+                putString("change24h", quote.percent_change_24h.toString())
+                putString("change7d", quote.percent_change_7d.toString())
+                putString("change30d", quote.percent_change_30d.toString())
+                putString("change60d", quote.percent_change_60d.toString())
+                putString("change90d", quote.percent_change_90d.toString())
+                putString("rank", crypto.cmc_rank.toString())
+                putString("marketCap", quote.market_cap.toString())
+                putString("maxSupply", crypto.max_supply.toString())
+                putString("cSupply", crypto.circulating_supply.toString())
+                putString("totalSupply", crypto.total_supply.toString())
+                putString("marketPair", crypto.num_market_pairs.toString())
+                putString("dilutedMarket", quote.fully_diluted_market_cap.toString())
+                putString("dominanceMarket", quote.market_cap_dominance.toString())
+                putString("volume24h", quote.volume_24h.toString())
             }
-            findNavController().navigate(R.id.cryptoChartDetailFragment,bundle)
+            if (findNavController().currentDestination?.id == R.id.homeFragment) {
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_cryptoChartDetailFragment,
+                    bundle
+                )
+            }
         }
     }
 
-    private fun losersRecyclerView(){
+    private fun losersRecyclerView() {
         binding.recView.apply {
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             losersAdapter = TopGainersAdapter()
             adapter = losersAdapter
         }

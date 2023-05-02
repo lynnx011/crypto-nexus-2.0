@@ -3,33 +3,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/biometricFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.cryptocurrency.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_cryptoChartDetailFragment"
+            app:destination="@id/cryptoChartDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/marketFragment"
         android:name="com.example.cryptocurrency.fragments.MarketFragment"
         android:label="fragment_market"
-        tools:layout="@layout/fragment_market" />
+        tools:layout="@layout/fragment_market" >
+        <action
+            android:id="@+id/action_marketFragment_to_cryptoChartDetailFragment"
+            app:destination="@id/cryptoChartDetailFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom"/>
+    </fragment>
     <fragment
         android:id="@+id/portfolioFragment"
         android:name="com.example.cryptocurrency.fragments.PortfolioFragment"
         android:label="fragment_watchlist"
-        tools:layout="@layout/fragment_portfolio" />
+        tools:layout="@layout/fragment_portfolio">
+        <action
+            android:id="@+id/action_portfolioFragment_to_addTransactionFragment"
+            app:destination="@id/addTransactionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/topGainersFragment"
         android:name="com.example.cryptocurrency.fragments.TopGainersFragment"
         android:label="fragment_top_gainers"
-        tools:layout="@layout/fragment_top_gainers" />
+        tools:layout="@layout/fragment_top_gainers" >
+        <action
+            android:id="@+id/action_topGainersFragment_to_cryptoChartDetailFragment"
+            app:destination="@id/cryptoChartDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/topLosersFragment"
         android:name="com.example.cryptocurrency.fragments.TopLosersFragment"
         android:label="fragment_top_losers"
-        tools:layout="@layout/fragment_top_losers" />
+        tools:layout="@layout/fragment_top_losers" >
+        <action
+            android:id="@+id/action_topLosersFragment_to_cryptoChartDetailFragment"
+            app:destination="@id/cryptoChartDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/cryptoChartDetailFragment"
         android:name="com.example.cryptocurrency.fragments.CryptoChartDetailFragment"
@@ -39,12 +79,24 @@
         android:id="@+id/addTransactionFragment"
         android:name="com.example.cryptocurrency.fragments.AddTransactionFragment"
         android:label="fragment_add_transaction"
-        tools:layout="@layout/fragment_add_transaction" />
+        tools:layout="@layout/fragment_add_transaction" >
+        <action
+            android:id="@+id/action_addTransactionFragment_to_transactionAmountFragment"
+            app:destination="@id/transactionAmountFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom"/>
+    </fragment>
     <fragment
         android:id="@+id/transactionAmountFragment"
         android:name="com.example.cryptocurrency.fragments.TransactionAmountFragment"
         android:label="fragment_transaction_amount"
-        tools:layout="@layout/fragment_transaction_amount" />
+        tools:layout="@layout/fragment_transaction_amount" >
+        <action
+            android:id="@+id/action_transactionAmountFragment_self"
+            app:destination="@id/transactionAmountFragment" />
+    </fragment>
     <fragment
         android:id="@+id/geckoFragment"
         android:name="com.example.cryptocurrency.fragments.GeckoFragment"
@@ -70,4 +122,9 @@
         android:name="com.example.cryptocurrency.fragments.BlockSpanDetailFragment"
         android:label="fragment_block_span_detail"
         tools:layout="@layout/fragment_block_span_detail" />
+    <fragment
+        android:id="@+id/biometricFragment"
+        android:name="com.example.cryptocurrency.fragments.BiometricFragment"
+        android:label="fragment_biometric"
+        tools:layout="@layout/fragment_biometric" />
 </navigation>

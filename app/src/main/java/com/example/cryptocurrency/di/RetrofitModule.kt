@@ -22,7 +22,7 @@ object RetrofitModule {
     private const val BASE_URL1 = "https://newsapi.org/v2/"
     private const val BASE_URL3 = "https://api.coingecko.com/api/v3/"
     private const val BASE_URL2 = "https://api.blockspan.com/v1/"
-    private const val COIN_MARKET_CAP_API_KEY = "d1847b16-720d-4e8f-b02e-00c5d5c6d8cc"
+    private const val COIN_MARKET_CAP_API_KEY = "74e2db5f-8200-4380-9b73-8da96c99d17c"
     private const val BLOCK_API_KEY = "sUnkWjd1DZ0vFcNQ6fy8ujbHg1TwR2qH"
 
     @Provides

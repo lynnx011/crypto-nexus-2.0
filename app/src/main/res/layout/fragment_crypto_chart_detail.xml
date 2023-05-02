@@ -139,7 +139,7 @@
                 android:textColor="@color/white"
                 app:rippleColor="@color/tangerine1"
                 android:paddingVertical="2dp"
-                android:text="15"
+                android:text="15m"
                 android:textAllCaps="false"
                 app:strokeColor="@color/tangerine1"
                 app:strokeWidth="1dp"

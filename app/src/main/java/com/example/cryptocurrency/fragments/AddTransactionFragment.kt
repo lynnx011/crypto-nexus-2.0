@@ -109,22 +109,14 @@ class AddTransactionFragment : Fragment() {
     private fun selectedCrypto() {
         transAdapter.onItemClick = { crypto ->
             val bundle = Bundle()
-            bundle.putString("name", crypto.name)
-            bundle.putString("symbol", crypto.symbol)
-            bundle.putString("id", crypto.id.toString())
-            bundle.putString("price", crypto.quote.USD.price.toString())
-            bundle.putString("change24h", crypto.quote.USD.percent_change_24h.toString())
-//            bundle.putString("change7d",crypto.quote.USD.percent_change_7d.toString())
-//            bundle.putString("change30d",crypto.quote.USD.percent_change_30d.toString())
-//            bundle.putString("change60d",crypto.quote.USD.percent_change_60d.toString())
-//            bundle.putString("change90d",crypto.quote.USD.percent_change_90d.toString())
-//            bundle.putString("rank",crypto.cmc_rank.toString())
-//            bundle.putString("marketCap",crypto.quote.USD.market_cap.toString())
-//            bundle.putString("maxSupply",crypto.max_supply.toString())
-//            bundle.putString("cSupply",crypto.circulating_supply.toString())
-//            bundle.putString("totalSupply",crypto.total_supply.toString())
-//            bundle.putString("marketPair",crypto.num_market_pairs.toString())
-            findNavController().navigate(R.id.transactionAmountFragment, bundle)
+            bundle.apply {
+                putString("name", crypto.name)
+                putString("symbol", crypto.symbol)
+                putString("id", crypto.id.toString())
+                putString("price", crypto.quote.USD.price.toString())
+                putString("change24h", crypto.quote.USD.percent_change_24h.toString())
+            }
+            findNavController().navigate(R.id.action_addTransactionFragment_to_transactionAmountFragment, bundle)
         }
     }
 

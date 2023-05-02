@@ -9,6 +9,7 @@
         <entry key="..\:/CryptoCurrency/app/src/main/res/drawable/chart.xml" value="0.1425" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/drawable/default_dot.xml" value="0.1425" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/drawable/detail_card.xml" value="0.1425" />
+        <entry key="..\:/CryptoCurrency/app/src/main/res/drawable/fingerprint.xml" value="0.1515" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/drawable/home1.xml" value="0.1425" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1425" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/drawable/market_background.xml" value="0.1425" />
@@ -19,7 +20,9 @@
         <entry key="..\:/CryptoCurrency/app/src/main/res/drawable/tab_shape.xml" value="0.1425" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/layout/block_nft_item.xml" value="0.2" />
+        <entry key="..\:/CryptoCurrency/app/src/main/res/layout/firebase_noti_layout.xml" value="0.1984375" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/layout/fragment_add_transaction.xml" value="0.2" />
+        <entry key="..\:/CryptoCurrency/app/src/main/res/layout/fragment_biometric.xml" value="0.1984375" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/layout/fragment_block_span_detail.xml" value="0.2" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/layout/fragment_crypto_chart_detail.xml" value="0.2" />
         <entry key="..\:/CryptoCurrency/app/src/main/res/layout/fragment_gecko.xml" value="0.2" />

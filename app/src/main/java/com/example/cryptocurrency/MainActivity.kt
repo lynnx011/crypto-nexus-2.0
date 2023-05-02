@@ -53,6 +53,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.blockSpanDetailFragment -> {
                     binding.bottomNav.isVisible = false
                 }
+                R.id.biometricFragment -> {
+                    supportActionBar?.hide()
+                    binding.bottomNav.isVisible = false
+                }
             }
         }
 
@@ -72,5 +76,9 @@ class MainActivity : AppCompatActivity() {
         }else{
             navController.popBackStack()
         }
+        if (destination == R.id.biometricFragment){
+            super.onBackPressed()
+        }
     }
+
 }

@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.FragmentTransactionAmountBinding
 import com.example.cryptocurrency.model.transaction.TransactionModel
-import com.example.cryptocurrency.network_detector.NetworkDetector
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class TransactionAmountFragment : Fragment() {
     private lateinit var binding: FragmentTransactionAmountBinding
     private val transactionViewModel: CryptoViewModel by viewModels()
-    private val networkDetector  by lazy { context?.let { NetworkDetector(it) } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
