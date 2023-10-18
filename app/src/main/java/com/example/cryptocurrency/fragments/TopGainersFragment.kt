@@ -1,4 +1,5 @@
 package com.example.cryptocurrency.fragments
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -6,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class TopGainersFragment : Fragment() {
     private lateinit var binding: FragmentTopGainersBinding
     private lateinit var gainersAdapter: TopGainersAdapter
-    private val gainerViewModel: CryptoViewModel by viewModels()
+    private val gainerViewModel: CryptoViewModel by activityViewModels()
     private val networkDetector by lazy { context?.let { NetworkDetector(it) } }
 
     override fun onCreateView(
@@ -53,43 +55,19 @@ class TopGainersFragment : Fragment() {
             }
         }
 
-        gainersAdapter.onItemClick = { crypto ->
-            val bundle = Bundle()
-            val quote = crypto.quote.USD
-            bundle.apply {
-                putString("symbol", crypto.symbol)
-                putString("name", crypto.name)
-                putString("id", crypto.id.toString())
-                putString("price", quote.price.toString())
-                putString("change24h", quote.percent_change_24h.toString())
-                putString("change7d", quote.percent_change_7d.toString())
-                putString("change30d", quote.percent_change_30d.toString())
-                putString("change60d", quote.percent_change_60d.toString())
-                putString("change90d", quote.percent_change_90d.toString())
-                putString("rank", crypto.cmc_rank.toString())
-                putString("marketCap", quote.market_cap.toString())
-                putString("maxSupply", crypto.max_supply.toString())
-                putString("cSupply", crypto.circulating_supply.toString())
-                putString("totalSupply", crypto.total_supply.toString())
-                putString("marketPair", crypto.num_market_pairs.toString())
-                putString("dilutedMarket", quote.fully_diluted_market_cap.toString())
-                putString("dominanceMarket", quote.market_cap_dominance.toString())
-                putString("volume24h", quote.volume_24h.toString())
-            }
-            if (findNavController().currentDestination?.id == R.id.homeFragment) {
-                findNavController().navigate(
-                    R.id.action_homeFragment_to_cryptoChartDetailFragment,
-                    bundle
-                )
-            }
-        }
-
     }
 
     private fun gainersRecyclerView() {
         binding.recView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            gainersAdapter = TopGainersAdapter()
+            gainersAdapter = TopGainersAdapter { cryptoDetails ->
+                gainerViewModel.cryptoDetails.value = cryptoDetails
+                if (findNavController().currentDestination?.id == R.id.homeFragment) {
+                    findNavController().navigate(
+                        R.id.action_homeFragment_to_cryptoChartDetailFragment
+                    )
+                }
+            }
             adapter = gainersAdapter
         }
     }

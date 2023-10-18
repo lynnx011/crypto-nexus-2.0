@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_btm_sheet_bg"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/drag_handle"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp"
+                tools:ignore="UselessParent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rank"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:letterSpacing="0.02"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/rank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:letterSpacing="0.02"
+                        android:text=""
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:textColor="@color/grey5"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="14dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:letterSpacing="0.02"
+                        android:text="Market Cap"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:textColor="@color/grey4"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/mCap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:letterSpacing="0.02"
+                        android:text=""
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:textColor="@color/grey5"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Volume 24h"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:letterSpacing="0.02"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/mVolume"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text=""
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey5"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Max Supply"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:letterSpacing="0.02"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/mSupply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:letterSpacing="0.02"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey5"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Supply"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/tSupply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:letterSpacing="0.02"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey5"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Circulating Supply"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/cSupply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:letterSpacing="0.02"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey5"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/grey3"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fully Diluted Market"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/dilutedMarket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:letterSpacing="0.02"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey5"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Market Dominance"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/marketDominance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:letterSpacing="0.02"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey5"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change%(7d)"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <ImageView
+                            android:id="@+id/caret7"
+                            android:layout_width="12dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_gravity="center"
+                            tools:ignore="ContentDescription" />
+                        <TextView
+                            android:id="@+id/change7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:text=""
+                            android:fontFamily="@font/josefin_sans_regular"
+                            android:letterSpacing="0.02"
+                            android:layout_gravity="start"
+                            android:textColor="@color/white"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change%(30d)"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <ImageView
+                            android:id="@+id/caret30"
+                            android:layout_width="12dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_gravity="center"
+                            tools:ignore="ContentDescription" />
+                        <TextView
+                            android:id="@+id/change30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:text=""
+                            android:fontFamily="@font/josefin_sans_regular"
+                            android:letterSpacing="0.02"
+                            android:layout_gravity="start"
+                            android:textColor="@color/white"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change%(60d)"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <ImageView
+                            android:id="@+id/caret60"
+                            android:layout_width="12dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_gravity="center"
+                            tools:ignore="ContentDescription" />
+                        <TextView
+                            android:id="@+id/change60"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:text=""
+                            android:fontFamily="@font/josefin_sans_regular"
+                            android:letterSpacing="0.02"
+                            android:layout_gravity="start"
+                            android:textColor="@color/white"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change%(90d)"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:layout_gravity="start"
+                        android:textColor="@color/grey4"
+                        tools:ignore="HardcodedText" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <ImageView
+                            android:id="@+id/caret90"
+                            android:layout_width="12dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_gravity="center"
+                            tools:ignore="ContentDescription" />
+                        <TextView
+                            android:id="@+id/change90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:text=""
+                            android:fontFamily="@font/josefin_sans_regular"
+                            android:letterSpacing="0.02"
+                            android:layout_gravity="start"
+                            android:textColor="@color/white"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

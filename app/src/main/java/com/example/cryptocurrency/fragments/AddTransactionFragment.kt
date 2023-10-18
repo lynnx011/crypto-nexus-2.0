@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +26,7 @@ class AddTransactionFragment : Fragment() {
     private lateinit var binding: FragmentAddTransactionBinding
     private lateinit var transAdapter: TransactionAdapter
     private val networkDetector by lazy { context?.let { NetworkDetector(it) } }
-    private val transViewModel: CryptoViewModel by viewModels()
+    private val transViewModel: CryptoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +58,7 @@ class AddTransactionFragment : Fragment() {
                     filterItem(cryptos)
                     binding.addTransCircular.isVisible = false
                 }
-                selectedCrypto()
+//                selectedCrypto()
             } else {
                 transViewModel.getRoomCryptos().observe(viewLifecycleOwner) { cryptos ->
                     transAdapter.differ.submitList(cryptos)
@@ -65,7 +66,7 @@ class AddTransactionFragment : Fragment() {
                     binding.addTransCircular.isVisible = false
                 }
                 setupRecyclerView()
-                selectedCrypto()
+//                selectedCrypto()
 //                    filterItem(emptyList)
 
             }
@@ -80,7 +81,10 @@ class AddTransactionFragment : Fragment() {
         binding.recView.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            transAdapter = TransactionAdapter()
+            transAdapter = TransactionAdapter{details ->
+                transViewModel.cryptoDetails.value = details
+                findNavController().navigate(R.id.action_addTransactionFragment_to_transactionAmountFragment)
+            }
             adapter = transAdapter
         }
     }
@@ -106,19 +110,18 @@ class AddTransactionFragment : Fragment() {
         })
     }
 
-    private fun selectedCrypto() {
-        transAdapter.onItemClick = { crypto ->
-            val bundle = Bundle()
-            bundle.apply {
-                putString("name", crypto.name)
-                putString("symbol", crypto.symbol)
-                putString("id", crypto.id.toString())
-                putString("price", crypto.quote.USD.price.toString())
-                putString("change24h", crypto.quote.USD.percent_change_24h.toString())
-            }
-            findNavController().navigate(R.id.action_addTransactionFragment_to_transactionAmountFragment, bundle)
-        }
-    }
+//    private fun selectedCrypto() {
+//        transAdapter.onItemClick = { crypto ->
+//            val bundle = Bundle()
+//            bundle.apply {
+//                putString("name", crypto.name)
+//                putString("symbol", crypto.symbol)
+//                putString("id", crypto.id.toString())
+//                putString("price", crypto.quote.USD.price.toString())
+//                putString("change24h", crypto.quote.USD.percent_change_24h.toString())
+//            }
+//        }
+//    }
 
 
 }

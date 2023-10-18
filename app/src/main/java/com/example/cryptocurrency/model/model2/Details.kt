@@ -1,5 +1,7 @@
 package com.example.cryptocurrency.model.model2
 
+import com.google.gson.annotations.SerializedName
+
 data class Details(
     val category: String,
     val contract_address: List<Any>,

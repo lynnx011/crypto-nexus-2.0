@@ -1,5 +1,7 @@
 package com.example.cryptocurrency.fragments
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,16 +11,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.FragmentCryptoChartDetailBinding
 import com.example.cryptocurrency.network_detector.NetworkDetector
+import com.example.cryptocurrency.view_model.CryptoViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +33,9 @@ class CryptoChartDetailFragment : Fragment() {
     private lateinit var binding: FragmentCryptoChartDetailBinding
     private lateinit var webView: WebView
     private lateinit var handler: Handler
+    private var dialog: BottomSheetDialog? = null
+    private val viewModel: CryptoViewModel by activityViewModels()
+    private var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>? = null
     private val networkDetector by lazy { context?.let { NetworkDetector(it) } }
 
     override fun onCreateView(
@@ -45,31 +55,45 @@ class CryptoChartDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        binding.favBtn.setOnClickListener {
+//            setupDetailsBtmSheet()
+//        }
+//        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+//        when(bottomSheetBehavior!!.state){
+//            BottomSheetBehavior.STATE_HIDDEN -> {
+//                binding.btmSheetIcon.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.dollar))
+//            }
+//            BottomSheetBehavior.STATE_COLLAPSED -> {
+//                binding.btmSheetIcon.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ape1))
+//            }
+//            BottomSheetBehavior.STATE_EXPANDED -> {
+//                binding.btmSheetIcon.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.analytics))
+//            }
+//        }
+
         handler = Handler(Looper.getMainLooper())
         val args = arguments
-        val cId = args?.getString("id")
-        val cSymbol = args?.getString("symbol")
-        val cPrice = args?.getString("price")
-        val cryptoPrice = cPrice?.toDouble()
-        val cChange24 = args?.getString("change24h")
-        val cChange24h = cChange24?.toDouble()
-        val change7d = args?.getString("change7d")
-        val change30d = args?.getString("change30d")
-        val change60d = args?.getString("change60d")
-        val change90d = args?.getString("change90d")
-        val cmcRank = args?.getString("rank")
-        val marketCap = args?.getString("marketCap")
-        val maxSupply = args?.getString("maxSupply")
-        val circulatingSupply = args?.getString("cSupply")
-        val totalSupply = args?.getString("totalSupply")
-        val marketPair = args?.getString("marketPair")
-        val dilutedMarket = args?.getString("dilutedMarket")
-        val marketDominance = args?.getString("dominanceMarket")
-        val volume24h = args?.getString("volume24h")
+        val cId = viewModel.cryptoDetails.value?.id
+        val cSymbol = viewModel.cryptoDetails.value?.symbol
+        val cPrice = viewModel.cryptoDetails.value?.quote?.USD?.price
+        val cChange24 = viewModel.cryptoDetails.value?.quote?.USD?.percent_change_24h
+        val change7d = viewModel.cryptoDetails.value?.quote?.USD?.percent_change_7d
+        val change30d = viewModel.cryptoDetails.value?.quote?.USD?.percent_change_30d
+        val change60d = viewModel.cryptoDetails.value?.quote?.USD?.percent_change_60d
+        val change90d = viewModel.cryptoDetails.value?.quote?.USD?.percent_change_90d
+        val cmcRank = viewModel.cryptoDetails.value?.cmc_rank
+        val marketCap = viewModel.cryptoDetails.value?.quote?.USD?.market_cap
+        val maxSupply = viewModel.cryptoDetails.value?.max_supply
+        val circulatingSupply = viewModel.cryptoDetails.value?.circulating_supply
+        val totalSupply = viewModel.cryptoDetails.value?.total_supply
+        val marketPair = viewModel.cryptoDetails.value?.num_market_pairs
+        val dilutedMarket = viewModel.cryptoDetails.value?.quote?.USD?.fully_diluted_market_cap
+        val marketDominance = viewModel.cryptoDetails.value?.quote?.USD?.market_cap_dominance
+        val volume24h = viewModel.cryptoDetails.value?.quote?.USD?.volume_24h
 
-        if (cId != null && cSymbol != null && cryptoPrice != null && cChange24h != null) {
+        if (cId != null && cSymbol != null && cPrice != null && cChange24 != null) {
 
-            cryptoDetailsSetup(cId.toInt(), cSymbol, cryptoPrice, cChange24h)
+            cryptoDetailsSetup(cId.toInt(), cSymbol, cPrice, cChange24)
 
             networkDetector?.observe(viewLifecycleOwner) { isConnected ->
                 if (isConnected) {
@@ -111,7 +135,7 @@ class CryptoChartDetailFragment : Fragment() {
                         findNavController().popBackStack()
                     }
 
-                    detailCard.setBackgroundResource(R.drawable.detail_card)
+//                    detailCard.setBackgroundResource(R.drawable.detail_card)
                 }
             }
         } else {
@@ -125,16 +149,16 @@ class CryptoChartDetailFragment : Fragment() {
         ) {
 
 
-            val formattedMarketCap = formattedValue(marketCap)
-            val formattedCirSupply = formattedValue(circulatingSupply)
-            val formattedMax = formattedValue(maxSupply)
-            val formattedTotal = formattedValue(totalSupply)
-            val formattedDilutedMarket = formattedValue(dilutedMarket)
+            val formattedMarketCap = formattedValue(marketCap.toString())
+            val formattedCirSupply = formattedValue(circulatingSupply.toString())
+            val formattedMax = formattedValue(maxSupply.toString())
+            val formattedTotal = formattedValue(totalSupply.toString())
+            val formattedDilutedMarket = formattedValue(dilutedMarket.toString())
             val formattedMarketDominance = String.format("%.2f%%", marketDominance.toDouble())
-            val formattedVolume24h = formattedValue(volume24h)
+            val formattedVolume24h = formattedValue(volume24h.toString())
 
             setupCryptoDetails(
-                cmcRank,
+                cmcRank.toString(),
                 formattedMarketCap,
                 formattedMax,
                 formattedCirSupply,
@@ -142,10 +166,10 @@ class CryptoChartDetailFragment : Fragment() {
                 formattedDilutedMarket,
                 formattedMarketDominance,
                 formattedVolume24h,
-                change7d,
-                change30d,
-                change60d,
-                change90d
+                change7d.toString(),
+                change30d.toString(),
+                change60d.toString(),
+                change90d.toString()
             )
         } else {
             Toast.makeText(requireContext(), "some data is not received!", Toast.LENGTH_SHORT)
@@ -153,17 +177,17 @@ class CryptoChartDetailFragment : Fragment() {
         }
 
 
-//        val handler = Handler(Looper.getMainLooper())
-//        val colorSequence = arrayOf(Color.RED, Color.GREEN, Color.WHITE, Color.WHITE)
-//        var colorIndex = 0
-//        val colorRunnable = object : Runnable {
-//            override fun run() {
-//                binding.price.setTextColor(colorSequence[colorIndex])
-//                colorIndex = (colorIndex + 1) % colorSequence.size
-//                handler.postDelayed(this, 3000)
-//            }
-//        }
-//        handler.postDelayed(colorRunnable, 100)
+        val handler = Handler(Looper.getMainLooper())
+        val colorSequence = arrayOf(Color.RED, Color.GREEN, Color.WHITE, Color.WHITE)
+        var colorIndex = 0
+        val colorRunnable = object : Runnable {
+            override fun run() {
+                binding.price.setTextColor(colorSequence[colorIndex])
+                colorIndex = (colorIndex + 1) % colorSequence.size
+                handler.postDelayed(this, 3000)
+            }
+        }
+        handler.postDelayed(colorRunnable, 100)
     }
 
     @SuppressLint("SetTextI18n")
@@ -203,6 +227,13 @@ class CryptoChartDetailFragment : Fragment() {
         }
 
     }
+
+//    private fun setupDetailsBtmSheet(){
+//        val btmSheetView = layoutInflater.inflate(R.layout.custom_details_btm_sheet,null)
+//        dialog = BottomSheetDialog(requireContext(),R.style.Theme_CryptoCurrency)
+//        dialog!!.setContentView(btmSheetView)
+//        dialog!!.show()
+//    }
 
     private fun cryptoDetailsSetup(
         tokenId: Int,
@@ -277,5 +308,10 @@ class CryptoChartDetailFragment : Fragment() {
         val suffix = if (marketValue >= 1_000_000_000) "Bn" else "M"
         val divisor = if (marketValue >= 1_000_000_000) 1_000_000_000 else 1_000_000
         return String.format("%.3f", marketValue / divisor) + " " + suffix
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.cryptoDetails.value = null
     }
 }

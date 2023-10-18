@@ -16,7 +16,7 @@ import com.example.cryptocurrency.model.CryptoDetails
 import com.example.cryptocurrency.model.USD
 import java.util.*
 
-class TopGainersAdapter: RecyclerView.Adapter<TopGainersAdapter.TopGainersViewHolder>(),Filterable {
+class TopGainersAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?): RecyclerView.Adapter<TopGainersAdapter.TopGainersViewHolder>(),Filterable {
     private lateinit var binding: TopGainersItemBinding
 
    var cryptoList = emptyList<CryptoDetails>()
@@ -28,7 +28,6 @@ class TopGainersAdapter: RecyclerView.Adapter<TopGainersAdapter.TopGainersViewHo
         differ.submitList(items)
         notifyDataSetChanged()
     }
-    var onItemClick : ((CryptoDetails) -> Unit)? = null
 
     class TopGainersViewHolder(val binding: TopGainersItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(crypto: CryptoDetails){

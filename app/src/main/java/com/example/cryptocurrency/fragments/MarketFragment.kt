@@ -1,4 +1,5 @@
 package com.example.cryptocurrency.fragments
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,7 +10,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrency.R
@@ -25,7 +26,7 @@ class MarketFragment : Fragment() {
     private lateinit var binding: FragmentMarketBinding
     private lateinit var marketAdapter: TopGainersAdapter
     private val networkDetector by lazy { context?.let { NetworkDetector(it) } }
-    private val marketViewModel: CryptoViewModel by viewModels()
+    private val marketViewModel: CryptoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +62,6 @@ class MarketFragment : Fragment() {
             }
 
         }
-        postDetail()
 
         binding.searchView.setBackgroundColor(
             ContextCompat.getColor(
@@ -80,7 +80,10 @@ class MarketFragment : Fragment() {
     private fun setupMarketRecyclerview() {
         binding.recView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            marketAdapter = TopGainersAdapter()
+            marketAdapter = TopGainersAdapter { cryptoDetails ->
+                marketViewModel.cryptoDetails.value = cryptoDetails
+                findNavController().navigate(R.id.action_marketFragment_to_cryptoChartDetailFragment)
+            }
             adapter = marketAdapter
         }
     }
@@ -104,34 +107,6 @@ class MarketFragment : Fragment() {
             }
 
         })
-    }
-
-    private fun postDetail() {
-        marketAdapter.onItemClick = { crypto ->
-            val bundle = Bundle()
-            val quote = crypto.quote.USD
-            bundle.apply {
-                putString("symbol", crypto.symbol)
-                putString("id", crypto.id.toString())
-                putString("name", crypto.name)
-                putString("price", quote.price.toString())
-                putString("change24h", quote.percent_change_24h.toString())
-                putString("change7d", quote.percent_change_7d.toString())
-                putString("change30d", quote.percent_change_30d.toString())
-                putString("change60d", quote.percent_change_60d.toString())
-                putString("change90d", quote.percent_change_90d.toString())
-                putString("rank", crypto.cmc_rank.toString())
-                putString("marketCap", quote.market_cap.toString())
-                putString("maxSupply", crypto.max_supply.toString())
-                putString("cSupply", crypto.circulating_supply.toString())
-                putString("totalSupply", crypto.total_supply.toString())
-                putString("marketPair", crypto.num_market_pairs.toString())
-                putString("dilutedMarket", quote.fully_diluted_market_cap.toString())
-                putString("dominanceMarket", quote.market_cap_dominance.toString())
-                putString("volume24h", quote.volume_24h.toString())
-            }
-            findNavController().navigate(R.id.action_marketFragment_to_cryptoChartDetailFragment, bundle)
-        }
     }
 
 }

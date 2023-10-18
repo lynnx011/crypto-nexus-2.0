@@ -1,4 +1,5 @@
 package com.example.cryptocurrency.view_model
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,12 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrency.model.CryptoDetails
 import com.example.cryptocurrency.model.model2.Details
 import com.example.cryptocurrency.model.model3.ConversionModel
-import com.example.cryptocurrency.model.model4.Result
 import com.example.cryptocurrency.model.model5.Article
 import com.example.cryptocurrency.model.model6.NftsModelItem
 import com.example.cryptocurrency.model.transaction.TransactionModel
 import com.example.cryptocurrency.repositories.CryptoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.cryptocurrency.model.model4.Result
+import com.example.cryptocurrency.model.model4.Stats
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -23,26 +25,18 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
     val topCryptosLiveData = MutableLiveData<List<CryptoDetails>>()
     val topGainersLosersLiveData = MutableLiveData<List<CryptoDetails>>()
     val marketLiveData = MutableLiveData<List<CryptoDetails>>()
-    val cryptoInfoLiveData = MutableLiveData<List<Details>>()
-    val conversionLiveData = MutableLiveData<ConversionModel>()
+    private val cryptoInfoLiveData = MutableLiveData<List<Details>>()
+    val conversionLiveData = MutableLiveData<ConversionModel?>()
+    val cryptoDetails = MutableLiveData<CryptoDetails?>()
+    val nftResult = MutableLiveData<Result?>()
+    val nftStats = MutableLiveData<Stats?>()
     val totalLiveData = MutableLiveData<String>()
     val nullValueLiveData = MutableLiveData("0")
     val cryptoNewsLiveData = MutableLiveData<List<Article>>()
-    val nftsListLiveData = MutableLiveData<List<NftsModelItem>?>()
+    private val nftsListLiveData = MutableLiveData<List<NftsModelItem>?>()
     val blockSpanNftLiveData = MutableLiveData<List<Result>>()
-
-    val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         throwable.localizedMessage?.let { Log.d("exception", it) }
-    }
-
-    init {
-        getTopCryptos()
-        getTopGainersLosers()
-        getMarketData()
-        getCryptoInfoData()
-        getCryptoNews()
-        getNfts()
-        getBlockSpanNfts()
     }
 
     fun getTopCryptos() = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
@@ -115,12 +109,18 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
         }
     }
 
-    fun getBlockSpanNfts() = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-        val response = repository.getBlockSpanNfts("eth-main", "opensea", "100").body()
-        withContext(Dispatchers.Main) {
-            if (response != null) {
-                blockSpanNftLiveData.value = response.results
+    fun getBlockSpanNfts() = CoroutineScope(Dispatchers.IO).launch {
+
+        try {
+            val response = repository.getBlockSpanNfts("eth-main", "opensea", "100").body()
+            withContext(Dispatchers.Main) {
+                if (response != null) {
+                    blockSpanNftLiveData.value = response.results
+                    Log.d("span_exc", response.toString())
+                }
             }
+        } catch (e: Exception) {
+            Log.d("span_exc", e.toString())
         }
     }
 
@@ -132,4 +132,17 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
 
     fun deleteTransaction(model: TransactionModel) = repository.deleteTransaction(model)
 
+    fun onClear() {
+        topGainersLosersLiveData.value = emptyList()
+        topGainersLosersLiveData.value = emptyList()
+        marketLiveData.value = emptyList()
+        cryptoInfoLiveData.value = emptyList()
+        cryptoNewsLiveData.value = emptyList()
+        nftsListLiveData.value = emptyList()
+        blockSpanNftLiveData.value = emptyList()
+        conversionLiveData.value = null
+        cryptoDetails.value = null
+        nftResult.value = null
+        nftStats.value = null
+    }
 }

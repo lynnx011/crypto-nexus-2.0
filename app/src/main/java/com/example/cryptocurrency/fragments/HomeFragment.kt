@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
     private lateinit var pagerAdapter: GainLossPagerAdapter
     private val networkDetector  by lazy { context?.let { NetworkDetector(it) } }
 
-    val cryptoViewModel : CryptoViewModel by viewModels()
+    private val cryptoViewModel : CryptoViewModel by activityViewModels()
 
     override fun onPause() {
         super.onPause()
@@ -136,29 +136,8 @@ class HomeFragment : Fragment() {
         })
 
         cryptoAdapter.onItemClick = { crypto ->
-            val bundle = Bundle()
-            val quote = crypto.quote.USD
-            bundle.apply {
-                putString("symbol",crypto.symbol)
-                putString("id",crypto.id.toString())
-                putString("name",crypto.name)
-                putString("price", quote.price.toString())
-                putString("change24h",quote.percent_change_24h.toString())
-                putString("change7d",quote.percent_change_7d.toString())
-                putString("change30d",quote.percent_change_30d.toString())
-                putString("change60d",quote.percent_change_60d.toString())
-                putString("change90d",quote.percent_change_90d.toString())
-                putString("rank",crypto.cmc_rank.toString())
-                putString("marketCap",quote.market_cap.toString())
-                putString("maxSupply",crypto.max_supply.toString())
-                putString("cSupply",crypto.circulating_supply.toString())
-                putString("totalSupply",crypto.total_supply.toString())
-                putString("marketPair",crypto.num_market_pairs.toString())
-                putString("dilutedMarket",quote.fully_diluted_market_cap.toString())
-                putString("dominanceMarket",quote.market_cap_dominance.toString())
-                putString("volume24h",quote.volume_24h.toString())
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_cryptoChartDetailFragment,bundle)
+            cryptoViewModel.cryptoDetails.value = crypto
+            findNavController().navigate(R.id.action_homeFragment_to_cryptoChartDetailFragment)
         }
     }
 
@@ -204,6 +183,11 @@ class HomeFragment : Fragment() {
             page.scaleY = 0.85f + r * 0.3f
         }
         viewPager.setPageTransformer(transformer)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cryptoViewModel.onClear()
     }
 
 }

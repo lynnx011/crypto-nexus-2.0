@@ -14,14 +14,12 @@ import com.example.cryptocurrency.model.CryptoDetails
 import com.example.cryptocurrency.model.USD
 import java.util.*
 
-class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>(),Filterable {
+class TransactionAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?) : RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>(),Filterable {
 
     private lateinit var binding: TransactionItemBinding
 
     var cryptoList = emptyList<CryptoDetails>()
     var filteredList = emptyList<CryptoDetails>()
-
-    var onItemClick : ((CryptoDetails) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateFilteredList(items: List<CryptoDetails>){
