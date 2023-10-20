@@ -89,7 +89,7 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
     fun getCryptoNews() = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
         try {
             val response =
-                repository.getCryptoNews("nfts", "d35eefdb54434e38877107bb4991bef9").body()
+                repository.getCryptoNews("nfts").body()
             withContext(Dispatchers.Main) {
                 if (response != null) {
                     cryptoNewsLiveData.value = response.articles

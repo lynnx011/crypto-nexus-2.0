@@ -33,7 +33,7 @@ class CryptoRepository @Inject constructor(
 
     suspend fun deleteCrypto() = db.cryptoDao().deleteCryptos()
 
-    suspend fun getCryptoNews(q: String, apiKey: String) = cryptoNewsApi.getCryptoNews(q, apiKey)
+    suspend fun getCryptoNews(q: String) = cryptoNewsApi.getCryptoNews(q)
 
     suspend fun getNfts() = geckoApi.getNfts()
 

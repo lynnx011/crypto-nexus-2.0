@@ -26,6 +26,7 @@
             android:resource="@color/black_glass" />
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true">
             <nav-graph android:value="@navigation/nav_graph" />
             <intent-filter>

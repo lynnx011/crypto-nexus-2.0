@@ -1,4 +1,6 @@
 package com.example.cryptocurrency
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -82,6 +84,11 @@ class MainActivity : AppCompatActivity() {
         if (destination == R.id.biometricFragment){
             super.onBackPressed()
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
 }

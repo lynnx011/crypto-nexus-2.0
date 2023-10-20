@@ -9,6 +9,5 @@ interface CryptoNewsApi {
     @GET("everything")
     suspend fun getCryptoNews(
         @Query("q") q: String,
-        @Query("apiKey") apiKey: String,
     ) : Response<NftsNews>
 }
