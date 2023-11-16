@@ -1,5 +1,6 @@
 package com.example.cryptocurrency.adapter
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -67,11 +68,11 @@ class TopGainersAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?): Re
 
         if (cryptos.quote.USD.percent_change_24h > 0.000){
             binding.percent.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.green))
-            binding.percent.text = String.format("+%.4f%%",cryptos.quote.USD.percent_change_24h)
+            binding.percent.text = String.format("+%.2f%%",cryptos.quote.USD.percent_change_24h)
         }
         if (cryptos.quote.USD.percent_change_24h < 0){
             binding.percent.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.chili))
-            binding.percent.text = String.format("%.4f%%",cryptos.quote.USD.percent_change_24h)
+            binding.percent.text = String.format("%.2f%%",cryptos.quote.USD.percent_change_24h)
         }
     }
 

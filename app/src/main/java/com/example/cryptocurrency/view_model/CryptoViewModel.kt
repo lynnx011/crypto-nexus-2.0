@@ -16,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.cryptocurrency.model.model4.Result
 import com.example.cryptocurrency.model.model4.Stats
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -27,11 +28,10 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
     val marketLiveData = MutableLiveData<List<CryptoDetails>>()
     private val cryptoInfoLiveData = MutableLiveData<List<Details>>()
     val conversionLiveData = MutableLiveData<ConversionModel?>()
+    val totalHoldingValue = MutableLiveData("")
     val cryptoDetails = MutableLiveData<CryptoDetails?>()
     val nftResult = MutableLiveData<Result?>()
     val nftStats = MutableLiveData<Stats?>()
-    val totalLiveData = MutableLiveData<String>()
-    val nullValueLiveData = MutableLiveData("0")
     val cryptoNewsLiveData = MutableLiveData<List<Article>>()
     private val nftsListLiveData = MutableLiveData<List<NftsModelItem>?>()
     val blockSpanNftLiveData = MutableLiveData<List<Result>>()

@@ -9,8 +9,8 @@ data class TransactionModel(
     val id: String,
     val name: String,
     val symbol: String,
-    val current_price: Double,
-    val usd_amount: Double,
-    val token_amount: Double,
+    var current_price: Double,
+    var usd_amount: Double,
+    var token_amount: Double,
     val percent_change: Double,
 )

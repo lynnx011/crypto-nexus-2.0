@@ -1,4 +1,5 @@
 package com.example.cryptocurrency.fragments
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
@@ -6,9 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.example.cryptocurrency.R
 import com.example.cryptocurrency.adapter.TransactionRoomAdapter
 import com.example.cryptocurrency.databinding.FragmentPortfolioBinding
 import com.example.cryptocurrency.utils.SwipeToDeleteCallback
+import com.example.cryptocurrency.utils.cutOffPoint
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -25,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PortfolioFragment : Fragment() {
     private lateinit var binding: FragmentPortfolioBinding
     private lateinit var transactionRoomAdapter: TransactionRoomAdapter
-    private val transactionRoomViewModel: CryptoViewModel by viewModels()
+    private val transactionRoomViewModel: CryptoViewModel by activityViewModels()
     private lateinit var swipeToDeleteCallback: SwipeToDeleteCallback
     private lateinit var remoteConfig: FirebaseRemoteConfig
     private lateinit var remoteConfigSettings: FirebaseRemoteConfigSettings
@@ -45,7 +47,10 @@ class PortfolioFragment : Fragment() {
         binding.recView.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
-            transactionRoomAdapter = TransactionRoomAdapter()
+            transactionRoomAdapter = TransactionRoomAdapter {
+                val bundle = bundleOf("portfolio_name" to it.name, "portfolio_symbol" to it.symbol)
+                findNavController().navigate(R.id.cryptoChartDetailFragment, bundle)
+            }
             adapter = transactionRoomAdapter
         }
         swipeToDeleteCallback =
@@ -56,7 +61,17 @@ class PortfolioFragment : Fragment() {
         transactionRoomViewModel.roomTransaction()
             .observe(viewLifecycleOwner) { transaction ->
                 transactionRoomAdapter.differ.submitList(transaction)
+                var totalTrans = 0.0
+                for (i in transaction) {
+                    totalTrans += i.usd_amount
+                }
+                transactionRoomViewModel.totalHoldingValue.value = "$${cutOffPoint(totalTrans)}"
+
             }
+
+        transactionRoomViewModel.totalHoldingValue.observe(viewLifecycleOwner) { value ->
+            binding.totalValue.text = value
+        }
 
         binding.addAsset.setOnClickListener {
             findNavController().navigate(R.id.action_portfolioFragment_to_addTransactionFragment)
@@ -85,7 +100,7 @@ class PortfolioFragment : Fragment() {
                 val updated = task.result
                 Log.d("config", "updated $updated")
             } else {
-                Log.d("config","failed")
+                Log.d("config", "failed")
             }
         }
     }

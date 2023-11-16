@@ -1,4 +1,5 @@
 package com.example.cryptocurrency.adapter
+
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,15 +17,16 @@ import com.example.cryptocurrency.model.USD
 class TopCryptoAdapter : RecyclerView.Adapter<TopCryptoAdapter.TopCryptoViewHolder>() {
     private lateinit var binding: TopCryptoItemsBinding
 
-    var onItemClick : ((CryptoDetails) -> Unit)? = null
+    var onItemClick: ((CryptoDetails) -> Unit)? = null
 
-    class TopCryptoViewHolder(val binding: TopCryptoItemsBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(crypto: CryptoDetails){
+    class TopCryptoViewHolder(val binding: TopCryptoItemsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(crypto: CryptoDetails) {
             binding.crypto = crypto
             binding.executePendingBindings()
         }
 
-        fun bindData(data: USD){
+        fun bindData(data: USD) {
             binding.crypto1 = data
             binding.executePendingBindings()
         }
@@ -56,13 +58,23 @@ class TopCryptoAdapter : RecyclerView.Adapter<TopCryptoAdapter.TopCryptoViewHold
             .thumbnail(Glide.with(holder.itemView.context).load(R.drawable.more))
             .into(holder.binding.cryptoChart)
 
-        if (cryptos.quote.USD.percent_change_24h > 0.000){
-            binding.change24h.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.green))
-            binding.change24h.text = "+${cryptos.quote.USD.percent_change_24h}%"
+        if (cryptos.quote.USD.percent_change_24h > 0.000) {
+            binding.change24h.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.green
+                )
+            )
+            binding.change24h.text = String.format("+%.2f%%", cryptos.quote.USD.percent_change_24h)
         }
-        if (cryptos.quote.USD.percent_change_24h < 0){
-            binding.change24h.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.chili))
-            binding.change24h.text = "${cryptos.quote.USD.percent_change_24h}%"
+        if (cryptos.quote.USD.percent_change_24h < 0) {
+            binding.change24h.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.chili
+                )
+            )
+            binding.change24h.text = String.format("%.2f%%", cryptos.quote.USD.percent_change_24h)
         }
     }
 
@@ -70,7 +82,7 @@ class TopCryptoAdapter : RecyclerView.Adapter<TopCryptoAdapter.TopCryptoViewHold
         return differ.currentList.size
     }
 
-    private val diffCallback = object : DiffUtil.ItemCallback<CryptoDetails>(){
+    private val diffCallback = object : DiffUtil.ItemCallback<CryptoDetails>() {
 
         override fun areItemsTheSame(oldItem: CryptoDetails, newItem: CryptoDetails): Boolean {
             return oldItem.id == newItem.id
@@ -82,5 +94,5 @@ class TopCryptoAdapter : RecyclerView.Adapter<TopCryptoAdapter.TopCryptoViewHold
 
     }
 
-    val differ = AsyncListDiffer(this,diffCallback)
+    val differ = AsyncListDiffer(this, diffCallback)
 }

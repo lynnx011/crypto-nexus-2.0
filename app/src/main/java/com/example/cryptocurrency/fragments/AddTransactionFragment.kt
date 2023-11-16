@@ -1,4 +1,5 @@
 package com.example.cryptocurrency.fragments
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrency.R
@@ -40,6 +40,7 @@ class AddTransactionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        transViewModel.getMarketData()
         binding.addTransCircular.isVisible = true
         binding.searchView.setBackgroundColor(
             ContextCompat.getColor(
@@ -48,7 +49,6 @@ class AddTransactionFragment : Fragment() {
             )
         )
         binding.searchCard.setBackgroundResource(R.drawable.search_bar_background)
-        val emptyList = emptyList<CryptoDetails>()
         binding.noConnection.isVisible = false
         networkDetector?.observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
@@ -58,7 +58,6 @@ class AddTransactionFragment : Fragment() {
                     filterItem(cryptos)
                     binding.addTransCircular.isVisible = false
                 }
-//                selectedCrypto()
             } else {
                 transViewModel.getRoomCryptos().observe(viewLifecycleOwner) { cryptos ->
                     transAdapter.differ.submitList(cryptos)
@@ -66,8 +65,6 @@ class AddTransactionFragment : Fragment() {
                     binding.addTransCircular.isVisible = false
                 }
                 setupRecyclerView()
-//                selectedCrypto()
-//                    filterItem(emptyList)
 
             }
         }
@@ -81,7 +78,7 @@ class AddTransactionFragment : Fragment() {
         binding.recView.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            transAdapter = TransactionAdapter{details ->
+            transAdapter = TransactionAdapter { details ->
                 transViewModel.cryptoDetails.value = details
                 findNavController().navigate(R.id.action_addTransactionFragment_to_transactionAmountFragment)
             }
@@ -109,19 +106,5 @@ class AddTransactionFragment : Fragment() {
 
         })
     }
-
-//    private fun selectedCrypto() {
-//        transAdapter.onItemClick = { crypto ->
-//            val bundle = Bundle()
-//            bundle.apply {
-//                putString("name", crypto.name)
-//                putString("symbol", crypto.symbol)
-//                putString("id", crypto.id.toString())
-//                putString("price", crypto.quote.USD.price.toString())
-//                putString("change24h", crypto.quote.USD.percent_change_24h.toString())
-//            }
-//        }
-//    }
-
 
 }

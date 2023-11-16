@@ -42,8 +42,16 @@ class CryptoRepository @Inject constructor(
 
     fun getTransaction() = db.cryptoDao().getTransaction()
 
-    suspend fun insertTransaction(transaction: TransactionModel) =
-        db.cryptoDao().insertTransaction(transaction)
+    suspend fun insertTransaction(transaction: TransactionModel){
+        val existingToken = db.cryptoDao().getTransactionByID(transaction.id)
+        if (existingToken != null){
+            existingToken.token_amount += transaction.token_amount
+            existingToken.usd_amount += transaction.usd_amount
+            db.cryptoDao().updateTransaction(existingToken)
+        }else{
+            db.cryptoDao().insertTransaction(transaction)
+        }
+    }
 
     fun deleteTransaction(transaction: TransactionModel) =
         db.cryptoDao().deleteTransaction(transaction)

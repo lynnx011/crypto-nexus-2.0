@@ -20,15 +20,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
+                android:paddingHorizontal="14dp"
                 android:orientation="horizontal"
                 tools:ignore="UseCompoundDrawables">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="14dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/josefin_sans_regular"
                     android:letterSpacing="0.02"
                     android:text="Your Portfolio"
@@ -37,12 +36,27 @@
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
+                <TextView
+                    android:id="@+id/totalValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/josefin_sans_regular"
+                    android:letterSpacing="0.02"
+                    tools:text="0.0 $"
+                    android:textColor="@color/green"
+                    android:textSize="18sp"
+                    android:textAlignment="textStart"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+
                 <ImageView
                     android:id="@+id/addAsset"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="8dp"
                     android:src="@drawable/database1"
                     tools:ignore="ContentDescription" />

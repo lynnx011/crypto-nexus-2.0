@@ -19,8 +19,14 @@ interface CryptoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTransaction(transaction: TransactionModel)
 
+    @Update
+    suspend fun updateTransaction(transaction: TransactionModel)
+
     @Query("SELECT * FROM transaction_model")
     fun getTransaction() : LiveData<List<TransactionModel>>
+
+    @Query("SELECT * FROM transaction_model WHERE id = :id")
+    suspend fun getTransactionByID(id: String): TransactionModel
 
     @Delete
     fun deleteTransaction(transaction: TransactionModel)

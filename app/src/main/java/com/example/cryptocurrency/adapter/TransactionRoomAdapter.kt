@@ -12,12 +12,11 @@ import com.example.cryptocurrency.databinding.HoldingItemBinding
 import com.example.cryptocurrency.model.USD
 import com.example.cryptocurrency.model.transaction.TransactionModel
 
-class TransactionRoomAdapter :
+class TransactionRoomAdapter(private val onItemClick: ((TransactionModel) -> Unit)?) :
     RecyclerView.Adapter<TransactionRoomAdapter.TransactionRoomViewHolder>() {
 
     private lateinit var binding: HoldingItemBinding
 
-    var onItemLongClick: ((TransactionModel) -> Unit)? = null
 
     fun deleteItem(position: Int) {
         val transaction = differ.currentList.toMutableList()
@@ -48,9 +47,8 @@ class TransactionRoomAdapter :
     override fun onBindViewHolder(holder: TransactionRoomViewHolder, position: Int) {
         val transactions = differ.currentList[position]
         holder.bind(transactions)
-        holder.itemView.setOnLongClickListener {
-            onItemLongClick?.invoke(transactions)
-            return@setOnLongClickListener true
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(transactions)
         }
         Glide.with(holder.itemView.context)
             .load("https://s2.coinmarketcap.com/static/img/coins/64x64/${transactions.id}.png")

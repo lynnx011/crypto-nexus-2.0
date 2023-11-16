@@ -1,4 +1,5 @@
 package com.example.cryptocurrency.utils
+
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
@@ -54,7 +55,7 @@ fun loadImageId(view: ImageView, imgId: Int) {
 
 @BindingAdapter("formatText")
 fun formatText(view: TextView, text: Double) {
-    view.text = String.format("$%.3f", text)
+    view.text = String.format("$%.4f", text)
 }
 
 @BindingAdapter("formatTransaction")

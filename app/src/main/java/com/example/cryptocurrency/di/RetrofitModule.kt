@@ -39,7 +39,7 @@ object RetrofitModule {
     @Singleton
     fun provideRetrofitCoinMarketCap(@Named("CoinMarketCap") okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(Constants.COIN_MARKET_CAP_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -68,7 +68,7 @@ object RetrofitModule {
     @Singleton
     fun provideRetrofitCryptoNews(@Named("CryptoNews") okHttpClient: OkHttpClient): CryptoNewsApi =
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL1)
+            .baseUrl(Constants.NEWS_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -93,7 +93,7 @@ object RetrofitModule {
     @Singleton
     fun provideRetrofitCoinGecko(@Named("CoinGecko") okHttpClient: OkHttpClient): GeckoApi =
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL3)
+            .baseUrl(Constants.COIN_GECKO_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -106,7 +106,7 @@ object RetrofitModule {
         .addInterceptor { chain ->
             val request = chain.request()
             val newRequest = request.newBuilder()
-                .addHeader("x-api-key", Constants.BLOCK_API_KEY)
+                .addHeader("x-api-key", Constants.BLOCK_SPAN_URL)
                 .build()
             chain.proceed(newRequest)
         }
@@ -119,7 +119,7 @@ object RetrofitModule {
     @Singleton
     fun provideRetrofitBlockSpan(@Named("BlockSpan") okHttpClient: OkHttpClient): BlockSpanApi =
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL2)
+            .baseUrl(Constants.BLOCK_SPAN_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
