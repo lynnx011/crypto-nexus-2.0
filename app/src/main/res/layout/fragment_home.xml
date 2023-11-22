@@ -38,61 +38,66 @@
                 </LinearLayout>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <androidx.cardview.widget.CardView
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                app:cardCornerRadius="8dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="12dp"
-                android:backgroundTint="@color/light_black"
-                app:cardElevation="60dp">
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </androidx.cardview.widget.CardView>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="174dp">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recView"
+                    android:layout_height="180dp"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="12dp"
+                    android:backgroundTint="@color/light_black"
+                    app:cardElevation="60dp">
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </androidx.cardview.widget.CardView>
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    tools:listitem="@layout/top_crypto_items"/>
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/topCircular"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/assistagro_loading_bars" />
-            </FrameLayout>
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/light_black"
-                app:tabMode="fixed"
-                android:layout_marginTop="12dp"
-                app:tabTextColor="@color/white"
-                app:tabIndicator="@drawable/tab_shape"
-                app:tabIndicatorColor="@null"
-                app:tabIndicatorAnimationMode="elastic"
-                app:tabIndicatorGravity="stretch"
-                app:tabIndicatorAnimationDuration="200"/>
+                    android:layout_height="174dp">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        tools:listitem="@layout/top_crypto_items"/>
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/topCircular"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/assistagro_loading_bars" />
+                </FrameLayout>
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/light_black"
+                    app:tabMode="fixed"
+                    android:layout_marginTop="12dp"
+                    app:tabTextColor="@color/white"
+                    app:tabIndicator="@drawable/tab_shape"
+                    app:tabIndicatorColor="@null"
+                    app:tabIndicatorAnimationMode="elastic"
+                    app:tabIndicatorGravity="stretch"
+                    app:tabIndicatorAnimationDuration="200"/>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

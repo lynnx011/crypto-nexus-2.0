@@ -27,7 +27,7 @@ interface CryptoApi {
 
     @GET("v2/tools/price-conversion")
     suspend fun getConversion(
-        @Query("amount") amount: Number,
+        @Query("amount") amount: Double,
         @Query("symbol") symbol: String,
         @Query("convert") convert: String
     ): ConversionModel

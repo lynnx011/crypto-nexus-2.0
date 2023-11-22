@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/homeFragment"
-        android:title="@string/home"
-        android:icon="@drawable/smarthome"/>
+        android:id="@+id/nav_home"
+        android:icon="@drawable/smarthome"
+        android:title="@string/home" />
     <item
-        android:id="@+id/marketFragment"
-        android:title="@string/market"
-        android:icon="@drawable/blockchain"/>
-    <item android:id="@+id/geckoFragment"
-        android:title="@string/crypto_news"
-        android:icon="@drawable/nft1"/>
+        android:id="@+id/nav_market"
+        android:icon="@drawable/blockchain"
+        android:title="@string/market" />
     <item
-        android:id="@+id/portfolioFragment"
-        android:title="@string/watchlist"
-        android:icon="@drawable/pie_chart1"/>
+        android:id="@+id/nav_gecko"
+        android:icon="@drawable/nft1"
+        android:title="@string/crypto_news" />
+    <item
+        android:id="@+id/nav_portfolio"
+        android:icon="@drawable/pie_chart1"
+        android:title="@string/watchlist" />
 </menu>

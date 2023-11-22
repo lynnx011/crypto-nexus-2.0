@@ -16,7 +16,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.cryptocurrency.model.model4.Result
 import com.example.cryptocurrency.model.model4.Stats
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -28,6 +27,9 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
     val marketLiveData = MutableLiveData<List<CryptoDetails>>()
     private val cryptoInfoLiveData = MutableLiveData<List<Details>>()
     val conversionLiveData = MutableLiveData<ConversionModel?>()
+    val convertAmount = MutableLiveData("")
+    val convertResult = MutableLiveData("0.0")
+    var isTransBtnValid = MutableLiveData(false)
     val totalHoldingValue = MutableLiveData("")
     val cryptoDetails = MutableLiveData<CryptoDetails?>()
     val nftResult = MutableLiveData<Result?>()
@@ -38,8 +40,10 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         throwable.localizedMessage?.let { Log.d("exception", it) }
     }
+    val coroutineScope = CoroutineScope(Dispatchers.IO + exceptionHandler)
 
-    fun getTopCryptos() = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+
+    fun getTopCryptos() = coroutineScope.launch {
         val response = repository.getTopCryptos().body()
         withContext(Dispatchers.Main) {
             if (response != null) {
@@ -48,7 +52,7 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
         }
     }
 
-    fun getTopGainersLosers() = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+    fun getTopGainersLosers() = coroutineScope.launch {
         val response = repository.getTopGainersLosers().body()
         withContext(Dispatchers.Main) {
             if (response != null) {
@@ -57,7 +61,7 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
         }
     }
 
-    fun getMarketData() = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+    fun getMarketData() = coroutineScope.launch {
         val response = repository.getTopGainersLosers().body()
         withContext(Dispatchers.Main) {
             if (response != null) {
@@ -69,15 +73,25 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
 
     fun getRoomCryptos() = repository.getRoomCrypto()
 
-    fun getCryptoConversion(amount: Int, symbol: String, convert: String) =
+    fun getCryptoConversion(symbol: String) =
         CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
             withContext(Dispatchers.Main) {
-                val response = repository.getConversion(amount, symbol, convert)
+                val response = convertAmount.value?.let {
+                    repository.getConversion(
+                        it.toDouble(),
+                        symbol,
+                        "USD"
+                    )
+                }
                 conversionLiveData.postValue(response)
+                val price = response?.data?.map {
+                    it.quote.USD.price
+                }
+                convertResult.value = price?.get(0)
             }
         }
 
-    fun getCryptoInfoData() = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+    fun getCryptoInfoData() = coroutineScope.launch {
         val response = repository.getCryptoInfo("ETH").body()
         withContext(Dispatchers.Main) {
             if (response != null) {
@@ -86,7 +100,7 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
         }
     }
 
-    fun getCryptoNews() = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+    fun getCryptoNews() = coroutineScope.launch {
         try {
             val response =
                 repository.getCryptoNews("nfts").body()
@@ -100,7 +114,7 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
         }
     }
 
-    fun getNfts() = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+    fun getNfts() = coroutineScope.launch {
         val response = repository.getNfts().body()
         withContext(Dispatchers.Main) {
             if (response != null) {
@@ -109,7 +123,7 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
         }
     }
 
-    fun getBlockSpanNfts() = CoroutineScope(Dispatchers.IO).launch {
+    fun getBlockSpanNfts() = coroutineScope.launch {
 
         try {
             val response = repository.getBlockSpanNfts("eth-main", "opensea", "100").body()
@@ -124,6 +138,11 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
         }
     }
 
+    fun transBtnValid() {
+        isTransBtnValid.value =
+            !convertAmount.value.isNullOrBlank() && convertResult.value?.toDouble() != 0.0
+    }
+
     fun insertTransaction(model: TransactionModel) = viewModelScope.launch {
         repository.insertTransaction(model)
     }
@@ -135,7 +154,7 @@ class CryptoViewModel @Inject constructor(private val repository: CryptoReposito
     fun onClear() {
         topGainersLosersLiveData.value = emptyList()
         topGainersLosersLiveData.value = emptyList()
-        marketLiveData.value = emptyList()
+//        marketLiveData.value = emptyList()
         cryptoInfoLiveData.value = emptyList()
         cryptoNewsLiveData.value = emptyList()
         nftsListLiveData.value = emptyList()

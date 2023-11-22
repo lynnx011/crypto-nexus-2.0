@@ -1,4 +1,5 @@
 package com.example.cryptocurrency.fragments
+
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -7,12 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -24,6 +23,8 @@ import com.example.cryptocurrency.adapter.TopCryptoAdapter
 import com.example.cryptocurrency.databinding.FragmentHomeBinding
 import com.example.cryptocurrency.network_detector.NetworkDetector
 import com.example.cryptocurrency.utils.ImageSliderAdapter
+import com.example.cryptocurrency.utils.navigateTo
+import com.example.cryptocurrency.utils.showToast
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,9 +42,9 @@ class HomeFragment : Fragment() {
     private lateinit var imageSliderAdapter: ImageSliderAdapter
     private lateinit var imageList: ArrayList<Int>
     private lateinit var pagerAdapter: GainLossPagerAdapter
-    private val networkDetector  by lazy { context?.let { NetworkDetector(it) } }
+    private val networkDetector by lazy { context?.let { NetworkDetector(it) } }
 
-    private val cryptoViewModel : CryptoViewModel by activityViewModels()
+    private val cryptoViewModel: CryptoViewModel by activityViewModels()
 
     override fun onPause() {
         super.onPause()
@@ -52,14 +53,14 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable,4000)
+        handler.postDelayed(runnable, 4000)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         return binding.root
     }
 
@@ -75,42 +76,42 @@ class HomeFragment : Fragment() {
 
         setupImageSliderTransformer()
 
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 handler.apply {
                     removeCallbacks(runnable)
-                    postDelayed(runnable,4000)
+                    postDelayed(runnable, 4000)
                 }
             }
         })
 
-        networkDetector?.observe(viewLifecycleOwner){ isConnected ->
-            if (isConnected){
+        networkDetector?.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
                 lifecycleScope.launch {
-                    cryptoViewModel.topCryptosLiveData.observe(viewLifecycleOwner){ data ->
+                    cryptoViewModel.topCryptosLiveData.observe(viewLifecycleOwner) { data ->
                         cryptoAdapter.differ.submitList(data)
                         binding.topCircular.isVisible = false
-                        Log.d("data",data.toString())
+                        Log.d("data", data.toString())
                     }
                 }
 
                 cryptoViewModel.getTopCryptos()
-            }else{
-                Toast.makeText(requireContext(),"Disconnected",Toast.LENGTH_SHORT).show()
+            } else {
+                showToast("Disconnected")
             }
         }
 
         tabLayout = binding.tabLayout
         viewPager2 = binding.viewPager2
-        pagerAdapter = GainLossPagerAdapter(childFragmentManager,lifecycle)
+        pagerAdapter = GainLossPagerAdapter(childFragmentManager, lifecycle)
 
         tabLayout.addTab(tabLayout.newTab().setText("Top Gainers"))
         tabLayout.addTab(tabLayout.newTab().setText("Top Losers"))
 
         viewPager2.adapter = pagerAdapter
 
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab != null) {
@@ -128,32 +129,31 @@ class HomeFragment : Fragment() {
 
         })
 
-        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 tabLayout.selectTab(tabLayout.getTabAt(position))
             }
         })
 
-        cryptoAdapter.onItemClick = { crypto ->
-            cryptoViewModel.cryptoDetails.value = crypto
-            findNavController().navigate(R.id.action_homeFragment_to_cryptoChartDetailFragment)
-        }
     }
 
     private val runnable = Runnable {
         viewPager.currentItem = viewPager.currentItem + 1
     }
 
-    private fun topCryptoRecyclerView(){
+    private fun topCryptoRecyclerView() {
         binding.recView.apply {
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-                cryptoAdapter = TopCryptoAdapter()
-                adapter = cryptoAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            cryptoAdapter = TopCryptoAdapter { crypto ->
+                cryptoViewModel.cryptoDetails.value = crypto
+                navigateTo(R.id.action_home_to_chart_details)
+            }
+            adapter = cryptoAdapter
         }
     }
 
-    private fun setupImageSlider(){
+    private fun setupImageSlider() {
         imageList = ArrayList()
         imageList.apply {
             add(R.drawable.ai_cloud_with_robot_face)
@@ -165,7 +165,7 @@ class HomeFragment : Fragment() {
             add(R.drawable.ai_cloud_concept_with_robot_arm)
         }
         viewPager = binding.viewPager
-        imageSliderAdapter = ImageSliderAdapter(viewPager,imageList)
+        imageSliderAdapter = ImageSliderAdapter(viewPager, imageList)
         viewPager.apply {
             adapter = imageSliderAdapter
             offscreenPageLimit = imageList.size
@@ -175,14 +175,19 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupImageSliderTransformer(){
+    private fun setupImageSliderTransformer() {
         val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(40))
-        transformer.addTransformer{page,position ->
+        transformer.addTransformer { page, position ->
             val r = 1 - abs(position)
             page.scaleY = 0.85f + r * 0.3f
         }
         viewPager.setPageTransformer(transformer)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
     }
 
     override fun onDestroy() {

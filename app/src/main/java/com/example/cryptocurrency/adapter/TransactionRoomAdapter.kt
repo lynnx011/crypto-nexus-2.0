@@ -1,4 +1,5 @@
 package com.example.cryptocurrency.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -11,6 +12,9 @@ import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.HoldingItemBinding
 import com.example.cryptocurrency.model.USD
 import com.example.cryptocurrency.model.transaction.TransactionModel
+import com.example.cryptocurrency.utils.cryptoLogoUrl
+import com.example.cryptocurrency.utils.loadImage
+import com.example.cryptocurrency.utils.setTextColor
 
 class TransactionRoomAdapter(private val onItemClick: ((TransactionModel) -> Unit)?) :
     RecyclerView.Adapter<TransactionRoomAdapter.TransactionRoomViewHolder>() {
@@ -31,11 +35,6 @@ class TransactionRoomAdapter(private val onItemClick: ((TransactionModel) -> Uni
             binding.executePendingBindings()
         }
 
-        fun bindList(data: USD) {
-            binding.crypto = data
-            binding.executePendingBindings()
-        }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionRoomViewHolder {
@@ -46,31 +45,27 @@ class TransactionRoomAdapter(private val onItemClick: ((TransactionModel) -> Uni
 
     override fun onBindViewHolder(holder: TransactionRoomViewHolder, position: Int) {
         val transactions = differ.currentList[position]
+        val context = holder.itemView.context
         holder.bind(transactions)
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(transactions)
         }
-        Glide.with(holder.itemView.context)
-            .load("https://s2.coinmarketcap.com/static/img/coins/64x64/${transactions.id}.png")
-            .placeholder(R.drawable.loading3).into(binding.logo)
+
+        binding.logo.loadImage(context, "https://s2.coinmarketcap.com/static/img/coins/64x64/${transactions.id}.png", R.drawable.loading3)
 
         if (transactions.percent_change > 0.000) {
-            binding.percent.setTextColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.green
-                )
-            )
-            binding.percent.text = String.format("+%.2f%%", transactions.percent_change)
+
+            binding.percent.apply {
+                this.setTextColor(context, R.color.green)
+                this.text = String.format("+%.2f%%", transactions.percent_change)
+            }
+
         }
         if (transactions.percent_change < 0) {
-            binding.percent.setTextColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.chili
-                )
-            )
-            binding.percent.text = String.format("%.2f%%", transactions.percent_change)
+            binding.percent.apply {
+                this.setTextColor(context, R.color.chili)
+                this.text = String.format("%.2f%%", transactions.percent_change)
+            }
         }
     }
 

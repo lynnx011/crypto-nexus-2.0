@@ -14,6 +14,7 @@ import com.example.cryptocurrency.R
 import com.example.cryptocurrency.adapter.BlockSpanAdapter
 import com.example.cryptocurrency.databinding.FragmentNftsBinding
 import com.example.cryptocurrency.network_detector.NetworkDetector
+import com.example.cryptocurrency.utils.navigateTo
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,7 +64,7 @@ class NftsFragment : Fragment() {
                     nftResult.value = result
                     nftStats.value = stats
                 }
-                findNavController().navigate(R.id.blockSpanDetailFragment)
+                navigateTo(R.id.nav_block_span_details)
 
             }
             adapter = blockSpanAdapter

@@ -8,13 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.FragmentBlockSpanDetailBinding
+import com.example.cryptocurrency.utils.loadImage
+import com.example.cryptocurrency.utils.popBack
 import com.example.cryptocurrency.view_model.CryptoViewModel
 
 class BlockSpanDetailFragment : Fragment() {
@@ -44,32 +43,21 @@ class BlockSpanDetailFragment : Fragment() {
         val exchangeUrl = nftViewModel.nftResult.value?.exchange_url
 
         binding.apply {
-            if (studioName != null) {
-                studio.text = studioName
-                creator.text = studioName
-            }
-            if (project != null) {
-                projectName.text = project
-                toolbarTitle.text = "Details of $project"
-            }
-            if (desc != null) {
-                description.text = desc
-            }
+                studio.text = studioName.orEmpty()
+                creator.text = studioName.orEmpty()
+            projectName.text = project.orEmpty()
+            toolbarTitle.text = if (project != null) "Details of $project" else "Details"
+            description.text = desc.orEmpty()
+            totalSupply.text = (supply ?: 0).toString()
+            totalOwner.text = (owners ?: 0).toString()
+            val formatVolume = String.format("%.2f", volume ?: 0.0)
+            totalVolume.text = formatVolume
+
             if (imageUrl != null) {
-                loadImage(profile, imageUrl)
+                profile.loadImage(requireContext(), imageUrl, R.drawable.img_1)
             }
             if (featuredUrl != null) {
-                loadImage(featured, featuredUrl)
-            }
-            if (supply != null) {
-                totalSupply.text = supply.toString()
-            }
-            if (owners != null) {
-                totalOwner.text = owners.toString()
-            }
-            if (volume != null) {
-                val formatVolume = String.format("%.2f", volume.toDouble())
-                totalVolume.text = formatVolume
+                featured.loadImage(requireContext(), featuredUrl, R.drawable.img_1)
             }
 
             opensea.setOnClickListener {
@@ -79,15 +67,8 @@ class BlockSpanDetailFragment : Fragment() {
         }
 
         binding.backKey.setOnClickListener {
-            findNavController().popBackStack()
+            popBack()
         }
-    }
-
-    private fun loadImage(view: ImageView, url: String) {
-        Glide.with(requireContext())
-            .load(url)
-            .placeholder(R.drawable.img_1)
-            .into(view)
     }
 
     override fun onDestroyView() {

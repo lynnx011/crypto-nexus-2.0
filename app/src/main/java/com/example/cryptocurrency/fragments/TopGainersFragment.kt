@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.adapter.TopGainersAdapter
 import com.example.cryptocurrency.databinding.FragmentTopGainersBinding
 import com.example.cryptocurrency.network_detector.NetworkDetector
+import com.example.cryptocurrency.utils.navigateTo
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -62,9 +62,9 @@ class TopGainersFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             gainersAdapter = TopGainersAdapter { cryptoDetails ->
                 gainerViewModel.cryptoDetails.value = cryptoDetails
-                if (findNavController().currentDestination?.id == R.id.homeFragment) {
-                    findNavController().navigate(
-                        R.id.action_homeFragment_to_cryptoChartDetailFragment
+                if (findNavController().currentDestination?.id == R.id.nav_home) {
+                    navigateTo(
+                        R.id.action_home_to_chart_details
                     )
                 }
             }

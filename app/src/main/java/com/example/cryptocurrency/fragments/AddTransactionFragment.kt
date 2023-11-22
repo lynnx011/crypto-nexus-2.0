@@ -7,17 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.adapter.TransactionAdapter
 import com.example.cryptocurrency.databinding.FragmentAddTransactionBinding
 import com.example.cryptocurrency.model.CryptoDetails
 import com.example.cryptocurrency.network_detector.NetworkDetector
+import com.example.cryptocurrency.utils.backgroundRes
+import com.example.cryptocurrency.utils.navigateTo
+import com.example.cryptocurrency.utils.popBack
+import com.example.cryptocurrency.utils.setEdtBackgroundColor
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,13 +44,8 @@ class AddTransactionFragment : Fragment() {
 
         transViewModel.getMarketData()
         binding.addTransCircular.isVisible = true
-        binding.searchView.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                R.color.grey3
-            )
-        )
-        binding.searchCard.setBackgroundResource(R.drawable.search_bar_background)
+        binding.searchView.setEdtBackgroundColor(requireContext(),R.color.grey3)
+        binding.searchCard.backgroundRes(R.drawable.search_bar_background)
         binding.noConnection.isVisible = false
         networkDetector?.observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
@@ -70,7 +67,7 @@ class AddTransactionFragment : Fragment() {
         }
 
         binding.backKey.setOnClickListener {
-            findNavController().popBackStack()
+            popBack()
         }
     }
 
@@ -80,7 +77,7 @@ class AddTransactionFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             transAdapter = TransactionAdapter { details ->
                 transViewModel.cryptoDetails.value = details
-                findNavController().navigate(R.id.action_addTransactionFragment_to_transactionAmountFragment)
+                navigateTo(R.id.action_add_trans_to_amount_trans)
             }
             adapter = transAdapter
         }

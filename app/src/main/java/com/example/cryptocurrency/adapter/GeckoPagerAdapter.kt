@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.cryptocurrency.fragments.NewsFragment
 import com.example.cryptocurrency.fragments.NftsFragment
 
-class GeckoPagerAdapter(val fragmentManager: FragmentManager,val lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager,lifecycle) {
+class GeckoPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager,lifecycle) {
 
     override fun getItemCount(): Int {
         return 2

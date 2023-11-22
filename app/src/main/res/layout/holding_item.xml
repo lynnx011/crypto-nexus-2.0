@@ -8,10 +8,6 @@
         <variable
             name="trans"
             type="com.example.cryptocurrency.model.transaction.TransactionModel" />
-
-        <variable
-            name="crypto"
-            type="com.example.cryptocurrency.model.USD" />
     </data>
 
     <androidx.cardview.widget.CardView

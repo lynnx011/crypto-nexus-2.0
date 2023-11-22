@@ -18,6 +18,9 @@ import com.example.cryptocurrency.adapter.TopGainersAdapter
 import com.example.cryptocurrency.databinding.FragmentMarketBinding
 import com.example.cryptocurrency.model.CryptoDetails
 import com.example.cryptocurrency.network_detector.NetworkDetector
+import com.example.cryptocurrency.utils.backgroundRes
+import com.example.cryptocurrency.utils.navigateTo
+import com.example.cryptocurrency.utils.setEdtBackgroundColor
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,37 +45,43 @@ class MarketFragment : Fragment() {
         var marketList = listOf<CryptoDetails>()
         binding.marketCircular.isVisible = true
         setupMarketRecyclerview()
-        binding.noConnection.isVisible = false
-        networkDetector?.observe(viewLifecycleOwner) { isConnected ->
-            if (isConnected) {
+//        binding.noConnection.isVisible = false
+//        networkDetector?.observe(viewLifecycleOwner) { isConnected ->
+//            if (isConnected) {
+                marketViewModel.getMarketData()
                 marketViewModel.marketLiveData.observe(viewLifecycleOwner) { cryptos ->
                     marketAdapter.differ.submitList(cryptos)
                     binding.marketCircular.isVisible = false
                     marketList = cryptos
                     searchOnMarket(marketList)
-                }
-                marketViewModel.getMarketData()
-
-            } else {
-                marketViewModel.getRoomCryptos().observe(viewLifecycleOwner) { cryptos ->
-                    marketAdapter.differ.submitList(cryptos)
-                    binding.marketCircular.isVisible = false
-                    searchOnMarket(marketList)
-                }
-            }
+//                }
+//
+//            }
+//            else {
+//                marketViewModel.getRoomCryptos().observe(viewLifecycleOwner) { cryptos ->
+//                    marketAdapter.differ.submitList(cryptos.sortedBy { it.cmc_rank })
+//                    binding.marketCircular.isVisible = false
+//                    searchOnMarket(marketList)
+//                }
+//            }
 
         }
 
-        binding.searchView.setBackgroundColor(
-            ContextCompat.getColor(
+        binding.searchView.apply {
+            setEdtBackgroundColor(
                 requireContext(),
                 R.color.grey3
             )
-        )
-        binding.searchCard.setBackgroundResource(R.drawable.search_bar_background)
+            this.setOnClickListener {
+               this.requestFocus()
+            }
+        }
 
-        binding.searchView.setOnClickListener {
-            binding.searchView.requestFocus()
+        binding.searchCard.backgroundRes(R.drawable.search_bar_background)
+
+        binding.refresher.setOnRefreshListener {
+            marketViewModel.getMarketData()
+            binding.refresher.isRefreshing = false
         }
 
     }
@@ -82,7 +91,7 @@ class MarketFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             marketAdapter = TopGainersAdapter { cryptoDetails ->
                 marketViewModel.cryptoDetails.value = cryptoDetails
-                findNavController().navigate(R.id.action_marketFragment_to_cryptoChartDetailFragment)
+                navigateTo(R.id.action_market_to_chart_details)
             }
             adapter = marketAdapter
         }

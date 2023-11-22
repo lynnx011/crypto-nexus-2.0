@@ -4,18 +4,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.adapter.CryptoNewsAdapter
 import com.example.cryptocurrency.databinding.FragmentNewsBinding
 import com.example.cryptocurrency.network_detector.NetworkDetector
+import com.example.cryptocurrency.utils.navigateWithBundle
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -57,7 +56,7 @@ class NewsFragment : Fragment() {
         }
 
         cryptoNewsAdapter.onItemClick = {
-            findNavController().navigate(R.id.newsDetailsFragment, bundleOf("newsUrl" to it.url))
+            navigateWithBundle(R.id.nav_news_details, bundleOf("newsUrl" to it.url))
         }
 
     }

@@ -46,28 +46,31 @@
                 android:layout_gravity="end"
                 tools:ignore="ContentDescription" />
         </com.google.android.material.appbar.MaterialToolbar>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:ignore="UselessLeaf"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessLeaf">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 tools:ignore="UselessParent">
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:cardCornerRadius="250dp"
-                    android:backgroundTint="@color/white"
                     android:layout_marginStart="10dp"
-                    android:paddingVertical="2dp"
+                    android:backgroundTint="@color/white"
                     android:outlineSpotShadowColor="@color/dark_grey"
+                    android:paddingVertical="2dp"
+                    app:cardCornerRadius="250dp"
                     app:cardElevation="40dp">
+
                     <ImageView
                         android:id="@+id/logo"
                         android:layout_width="match_parent"
@@ -75,178 +78,209 @@
                         android:scaleType="centerCrop"
                         tools:ignore="ContentDescription" />
                 </androidx.cardview.widget.CardView>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:layout_marginHorizontal="30dp"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_weight="1">
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="20sp"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/josefin_sans_regular"
-                        android:padding="2dp"
-                        android:letterSpacing="0.04"
+                        android:layout_gravity="start"
                         android:layout_marginEnd="30dp"
-                        android:layout_gravity="start"/>
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:letterSpacing="0.04"
+                        android:padding="2dp"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"
-                        android:orientation="horizontal"
                         android:layout_gravity="start"
                         android:layout_marginTop="4dp"
+                        android:layout_marginEnd="30dp"
+                        android:orientation="horizontal"
                         tools:ignore="UseCompoundDrawables">
+
                         <ImageView
                             android:id="@+id/caret"
                             android:layout_width="20dp"
-                            android:padding="2dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="center"
                             android:layout_marginEnd="2dp"
-                            android:layout_height="20dp"
+                            android:padding="2dp"
                             tools:ignore="ContentDescription" />
+
                         <TextView
                             android:id="@+id/percent24h"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
                             android:fontFamily="@font/josefin_sans_regular"
-                            android:textSize="14sp"
+                            android:letterSpacing="0.04"
+                            android:text=""
                             android:textColor="@color/tangerine1"
-                            android:textStyle="bold"
-                            android:letterSpacing="0.04" />
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
+
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:layout_marginHorizontal="2dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/min15"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="2dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/josefin_sans_regular"
-                    android:backgroundTint="@color/grey3"
-                    android:textColor="@color/white"
-                    app:rippleColor="@color/tangerine1"
-                    android:paddingVertical="2dp"
-                    android:text="15m"
-                    android:textAllCaps="false"
-                    app:strokeColor="@color/tangerine1"
-                    app:strokeWidth="1dp"
-                    tools:ignore="HardcodedText" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/min15"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/grey3"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:paddingVertical="2dp"
+                        android:text="15Min"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:rippleColor="@color/tangerine1"
+                        app:strokeColor="@color/tangerine1"
+                        app:strokeWidth="1dp"
+                        tools:ignore="HardcodedText" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/hour1"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
-                    android:text="1H"
-                    android:paddingVertical="2dp"
-                    android:textAllCaps="false"
-                    app:strokeWidth="1dp"
-                    android:fontFamily="@font/josefin_sans_regular"
-                    app:strokeColor="@color/tangerine1"
-                    android:backgroundTint="@color/grey3"
-                    app:rippleColor="@color/tangerine1"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="2dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    tools:ignore="HardcodedText" />
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/hour4"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
-                    android:text="4H"
-                    android:fontFamily="@font/josefin_sans_regular"
-                    android:paddingVertical="2dp"
-                    android:textAllCaps="false"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/tangerine1"
-                    android:backgroundTint="@color/grey3"
-                    app:rippleColor="@color/tangerine1"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="2dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    tools:ignore="HardcodedText" />
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/day1"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
-                    android:text="1D"
-                    android:paddingVertical="2dp"
-                    android:textAllCaps="false"
-                    app:strokeWidth="1dp"
-                    android:fontFamily="@font/josefin_sans_regular"
-                    app:strokeColor="@color/tangerine1"
-                    android:backgroundTint="@color/grey3"
-                    app:rippleColor="@color/tangerine1"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="2dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    tools:ignore="HardcodedText" />
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/week1"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
-                    android:text="1W"
-                    android:paddingVertical="2dp"
-                    android:textAllCaps="false"
-                    app:strokeWidth="1dp"
-                    android:fontFamily="@font/josefin_sans_regular"
-                    app:strokeColor="@color/tangerine1"
-                    android:backgroundTint="@color/grey3"
-                    app:rippleColor="@color/tangerine1"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="2dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    tools:ignore="HardcodedText" />
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/month1"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
-                    android:text="1M"
-                    android:fontFamily="@font/josefin_sans_regular"
-                    android:paddingVertical="2dp"
-                    android:textAllCaps="false"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/tangerine1"
-                    android:backgroundTint="@color/grey3"
-                    app:rippleColor="@color/tangerine1"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="2dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/hour1"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/grey3"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:paddingVertical="2dp"
+                        android:text="1H"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:rippleColor="@color/tangerine1"
+                        app:strokeColor="@color/tangerine1"
+                        app:strokeWidth="1dp"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/hour4"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/grey3"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:paddingVertical="2dp"
+                        android:text="4H"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:rippleColor="@color/tangerine1"
+                        app:strokeColor="@color/tangerine1"
+                        app:strokeWidth="1dp"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/day1"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/grey3"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:paddingVertical="2dp"
+                        android:text="1D"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:rippleColor="@color/tangerine1"
+                        app:strokeColor="@color/tangerine1"
+                        app:strokeWidth="1dp"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/week1"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/grey3"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:paddingVertical="2dp"
+                        android:text="1W"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:rippleColor="@color/tangerine1"
+                        app:strokeColor="@color/tangerine1"
+                        app:strokeWidth="1dp"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/month1"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/grey3"
+                        android:fontFamily="@font/josefin_sans_regular"
+                        android:paddingVertical="2dp"
+                        android:text="1M"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:rippleColor="@color/tangerine1"
+                        app:strokeColor="@color/tangerine1"
+                        app:strokeWidth="1dp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:outlineSpotShadowColor="@color/light_black"
                 app:cardElevation="40dp">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <WebView
                         android:id="@+id/webView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
+
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/noConnection"
                         android:layout_width="240dp"
@@ -258,482 +292,36 @@
 
                 </FrameLayout>
             </androidx.cardview.widget.CardView>
-            <!--        <androidx.cardview.widget.CardView-->
-            <!--            android:id="@+id/detailCard"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="0dp"-->
-            <!--            android:layout_weight="1"-->
-            <!--            android:layout_marginBottom="-10dp"-->
-            <!--            android:layout_marginStart="-6dp"-->
-            <!--            android:layout_marginEnd="-6dp"-->
-            <!--            android:layout_marginTop="14dp">-->
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_marginTop="20dp"-->
-<!--                            android:layout_marginBottom="10dp"-->
-<!--                            android:orientation="horizontal">-->
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="match_parent"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:orientation="vertical"-->
-<!--                                android:layout_marginStart="10dp"-->
-<!--                                tools:ignore="UselessParent">-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="12dp"-->
-<!--                                    android:layout_marginBottom="2dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical"-->
-<!--                                    tools:ignore="UselessParent">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Rank"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
+            <LinearLayout
+                android:id="@+id/swipeTextLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/swipeImg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/swipe_up"/>
 
-<!--                                    <TextView-->
-<!--                                        android:id="@+id/rank"-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:text=""-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:textColor="@color/grey5"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                </LinearLayout>-->
+                <TextView
+                    android:id="@+id/swipeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="Swipe up to see more details"
+                    android:fontFamily="@font/josefin_sans_regular"
+                    android:letterSpacing="0.04"
+                    android:textStyle="bold"
+                    android:textColor="@color/tangerine1"
+                    android:textSize="18sp" />
 
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="2dp"-->
-<!--                                    android:orientation="vertical">-->
-
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:text="Market Cap"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-
-<!--                                    <TextView-->
-<!--                                        android:id="@+id/mCap"-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:text=""-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:textColor="@color/grey5"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                </LinearLayout>-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="2dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Volume 24h"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                    <TextView-->
-<!--                                        android:id="@+id/mVolume"-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:text=""-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey5"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                </LinearLayout>-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="2dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Max Supply"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                    <TextView-->
-<!--                                        android:id="@+id/mSupply"-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:text=""-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey5"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                </LinearLayout>-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="2dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Total Supply"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                    <TextView-->
-<!--                                        android:id="@+id/tSupply"-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:text=""-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey5"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                </LinearLayout>-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="2dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Circulating Supply"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                    <TextView-->
-<!--                                        android:id="@+id/cSupply"-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:text=""-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey5"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                </LinearLayout>-->
-<!--                            </LinearLayout>-->
-<!--                            <View-->
-<!--                                android:layout_width="1dp"-->
-<!--                                android:layout_height="match_parent"-->
-<!--                                android:layout_marginTop="16dp"-->
-<!--                                android:layout_marginBottom="30dp"-->
-<!--                                android:background="@color/grey3"/>-->
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="match_parent"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:orientation="vertical">-->
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginTop="10dp"-->
-<!--                                android:layout_marginBottom="2dp"-->
-<!--                                android:layout_marginHorizontal="14dp"-->
-<!--                                android:orientation="vertical"-->
-<!--                                tools:ignore="UselessParent">-->
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:text="Fully Diluted Market"-->
-<!--                                    android:textSize="16sp"-->
-<!--                                    android:textStyle="bold"-->
-<!--                                    android:letterSpacing="0.02"-->
-<!--                                    android:layout_gravity="start"-->
-<!--                                    android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                    android:textColor="@color/grey4"-->
-<!--                                    tools:ignore="HardcodedText" />-->
-<!--                                <TextView-->
-<!--                                    android:id="@+id/dilutedMarket"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:textSize="16sp"-->
-<!--                                    android:textStyle="bold"-->
-<!--                                    android:text=""-->
-<!--                                    android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                    android:letterSpacing="0.02"-->
-<!--                                    android:layout_gravity="start"-->
-<!--                                    android:textColor="@color/grey5"-->
-<!--                                    tools:ignore="HardcodedText" />-->
-<!--                            </LinearLayout>-->
-
-
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="2dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Market Dominance"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                    <TextView-->
-<!--                                        android:id="@+id/marketDominance"-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:text=""-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey5"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                </LinearLayout>-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="4dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Change%(7d)"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                    <LinearLayout-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="match_parent"-->
-<!--                                        android:orientation="horizontal"-->
-<!--                                        tools:ignore="UseCompoundDrawables">-->
-<!--                                        <ImageView-->
-<!--                                            android:id="@+id/caret7"-->
-<!--                                            android:layout_width="12dp"-->
-<!--                                            android:layout_height="16dp"-->
-<!--                                            android:layout_marginEnd="4dp"-->
-<!--                                            android:layout_marginTop="2dp"-->
-<!--                                            android:layout_gravity="center"-->
-<!--                                            tools:ignore="ContentDescription" />-->
-<!--                                        <TextView-->
-<!--                                            android:id="@+id/change7"-->
-<!--                                            android:layout_width="wrap_content"-->
-<!--                                            android:layout_height="wrap_content"-->
-<!--                                            android:textSize="16sp"-->
-<!--                                            android:textStyle="bold"-->
-<!--                                            android:text=""-->
-<!--                                            android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                            android:letterSpacing="0.02"-->
-<!--                                            android:layout_gravity="start"-->
-<!--                                            android:textColor="@color/white"-->
-<!--                                            tools:ignore="HardcodedText" />-->
-<!--                                    </LinearLayout>-->
-
-<!--                                </LinearLayout>-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="4dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Change%(30d)"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                    <LinearLayout-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="match_parent"-->
-<!--                                        android:orientation="horizontal"-->
-<!--                                        tools:ignore="UseCompoundDrawables">-->
-<!--                                        <ImageView-->
-<!--                                            android:id="@+id/caret30"-->
-<!--                                            android:layout_width="12dp"-->
-<!--                                            android:layout_height="16dp"-->
-<!--                                            android:layout_marginEnd="4dp"-->
-<!--                                            android:layout_marginTop="2dp"-->
-<!--                                            android:layout_gravity="center"-->
-<!--                                            tools:ignore="ContentDescription" />-->
-<!--                                        <TextView-->
-<!--                                            android:id="@+id/change30"-->
-<!--                                            android:layout_width="wrap_content"-->
-<!--                                            android:layout_height="wrap_content"-->
-<!--                                            android:textSize="16sp"-->
-<!--                                            android:textStyle="bold"-->
-<!--                                            android:text=""-->
-<!--                                            android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                            android:letterSpacing="0.02"-->
-<!--                                            android:layout_gravity="start"-->
-<!--                                            android:textColor="@color/white"-->
-<!--                                            tools:ignore="HardcodedText" />-->
-<!--                                    </LinearLayout>-->
-
-<!--                                </LinearLayout>-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="4dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Change%(60d)"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                    <LinearLayout-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="match_parent"-->
-<!--                                        android:orientation="horizontal"-->
-<!--                                        tools:ignore="UseCompoundDrawables">-->
-<!--                                        <ImageView-->
-<!--                                            android:id="@+id/caret60"-->
-<!--                                            android:layout_width="12dp"-->
-<!--                                            android:layout_height="16dp"-->
-<!--                                            android:layout_marginEnd="4dp"-->
-<!--                                            android:layout_marginTop="2dp"-->
-<!--                                            android:layout_gravity="center"-->
-<!--                                            tools:ignore="ContentDescription" />-->
-<!--                                        <TextView-->
-<!--                                            android:id="@+id/change60"-->
-<!--                                            android:layout_width="wrap_content"-->
-<!--                                            android:layout_height="wrap_content"-->
-<!--                                            android:textSize="16sp"-->
-<!--                                            android:textStyle="bold"-->
-<!--                                            android:text=""-->
-<!--                                            android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                            android:letterSpacing="0.02"-->
-<!--                                            android:layout_gravity="start"-->
-<!--                                            android:textColor="@color/white"-->
-<!--                                            tools:ignore="HardcodedText" />-->
-<!--                                    </LinearLayout>-->
-
-<!--                                </LinearLayout>-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:layout_marginBottom="4dp"-->
-<!--                                    android:layout_marginHorizontal="14dp"-->
-<!--                                    android:orientation="vertical">-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="Change%(90d)"-->
-<!--                                        android:textSize="16sp"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:letterSpacing="0.02"-->
-<!--                                        android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                        android:layout_gravity="start"-->
-<!--                                        android:textColor="@color/grey4"-->
-<!--                                        tools:ignore="HardcodedText" />-->
-<!--                                    <LinearLayout-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="match_parent"-->
-<!--                                        android:orientation="horizontal"-->
-<!--                                        tools:ignore="UseCompoundDrawables">-->
-<!--                                        <ImageView-->
-<!--                                            android:id="@+id/caret90"-->
-<!--                                            android:layout_width="12dp"-->
-<!--                                            android:layout_height="16dp"-->
-<!--                                            android:layout_marginEnd="4dp"-->
-<!--                                            android:layout_marginTop="2dp"-->
-<!--                                            android:layout_gravity="center"-->
-<!--                                            tools:ignore="ContentDescription" />-->
-<!--                                        <TextView-->
-<!--                                            android:id="@+id/change90"-->
-<!--                                            android:layout_width="wrap_content"-->
-<!--                                            android:layout_height="wrap_content"-->
-<!--                                            android:textSize="16sp"-->
-<!--                                            android:textStyle="bold"-->
-<!--                                            android:text=""-->
-<!--                                            android:fontFamily="@font/josefin_sans_regular"-->
-<!--                                            android:letterSpacing="0.02"-->
-<!--                                            android:layout_gravity="start"-->
-<!--                                            android:textColor="@color/white"-->
-<!--                                            tools:ignore="HardcodedText" />-->
-<!--                                    </LinearLayout>-->
-<!--                                </LinearLayout>-->
-<!--                            </LinearLayout>-->
-<!--                        </LinearLayout>-->
-            <!--        </androidx.cardview.widget.CardView>-->
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <View

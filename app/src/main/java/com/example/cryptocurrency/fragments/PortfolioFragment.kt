@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrency.R
@@ -18,6 +17,8 @@ import com.example.cryptocurrency.adapter.TransactionRoomAdapter
 import com.example.cryptocurrency.databinding.FragmentPortfolioBinding
 import com.example.cryptocurrency.utils.SwipeToDeleteCallback
 import com.example.cryptocurrency.utils.cutOffPoint
+import com.example.cryptocurrency.utils.navigateTo
+import com.example.cryptocurrency.utils.navigateWithBundle
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -31,8 +32,6 @@ class PortfolioFragment : Fragment() {
     private lateinit var swipeToDeleteCallback: SwipeToDeleteCallback
     private lateinit var remoteConfig: FirebaseRemoteConfig
     private lateinit var remoteConfigSettings: FirebaseRemoteConfigSettings
-    var isHide = false
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,7 +48,7 @@ class PortfolioFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
             transactionRoomAdapter = TransactionRoomAdapter {
                 val bundle = bundleOf("portfolio_name" to it.name, "portfolio_symbol" to it.symbol)
-                findNavController().navigate(R.id.cryptoChartDetailFragment, bundle)
+                navigateWithBundle(R.id.action_portfolio_to_chart_details, bundle)
             }
             adapter = transactionRoomAdapter
         }
@@ -74,7 +73,7 @@ class PortfolioFragment : Fragment() {
         }
 
         binding.addAsset.setOnClickListener {
-            findNavController().navigate(R.id.action_portfolioFragment_to_addTransactionFragment)
+            navigateTo(R.id.action_portfolio_to_add_trans)
         }
 
         remoteConfig = FirebaseRemoteConfig.getInstance()

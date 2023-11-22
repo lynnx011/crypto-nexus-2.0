@@ -1,14 +1,15 @@
 package com.example.cryptocurrency.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.NewsItemBinding
 import com.example.cryptocurrency.model.model5.Article
+import com.example.cryptocurrency.utils.loadImg
 
 class CryptoNewsAdapter : RecyclerView.Adapter<CryptoNewsAdapter.CryptoNewsViewHolder>() {
 
@@ -31,10 +32,9 @@ class CryptoNewsAdapter : RecyclerView.Adapter<CryptoNewsAdapter.CryptoNewsViewH
 
     override fun onBindViewHolder(holder: CryptoNewsViewHolder, position: Int) {
         val news = differ.currentList[position]
+        val context = holder.itemView.context
         holder.bindData(news)
-        Glide.with(holder.itemView.context)
-            .load(news.urlToImage)
-            .into(holder.binding.thumbnail)
+        binding.thumbnail.loadImg(context, news.urlToImage)
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(news)
         }

@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
@@ -15,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptocurrency.databinding.ActivityMainBinding
 import com.example.cryptocurrency.databinding.FragmentSplashBinding
+import com.example.cryptocurrency.utils.showToast
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,50 +35,24 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, d, _ ->
             when (d.id) {
-                R.id.homeFragment -> {
+                R.id.nav_home,R.id.nav_market,R.id.nav_portfolio -> {
                     supportActionBar?.hide()
                     binding.bottomNav.isVisible = true
                 }
 
-                R.id.marketFragment -> {
+                R.id.nav_chart_details,R.id.nav_biometric -> {
                     supportActionBar?.hide()
+                    binding.bottomNav.isVisible = false
+                }
+
+                R.id.nav_add_trans,R.id.nav_news_details,R.id.nav_nft,R.id.nav_block_span_details -> {
+                    binding.bottomNav.isVisible = false
+                }
+
+                R.id.nav_gecko -> {
                     binding.bottomNav.isVisible = true
                 }
 
-                R.id.portfolioFragment -> {
-                    supportActionBar?.hide()
-                    binding.bottomNav.isVisible = true
-                }
-
-                R.id.cryptoChartDetailFragment -> {
-                    supportActionBar?.hide()
-                    binding.bottomNav.isVisible = false
-                }
-
-                R.id.addTransactionFragment -> {
-                    binding.bottomNav.isVisible = false
-                }
-
-                R.id.newsDetailsFragment -> {
-                    binding.bottomNav.isVisible = false
-                }
-
-                R.id.nftsFragment -> {
-                    binding.bottomNav.isVisible = false
-                }
-
-                R.id.geckoFragment -> {
-                    binding.bottomNav.isVisible = true
-                }
-
-                R.id.blockSpanDetailFragment -> {
-                    binding.bottomNav.isVisible = false
-                }
-
-                R.id.biometricFragment -> {
-                    supportActionBar?.hide()
-                    binding.bottomNav.isVisible = false
-                }
             }
         }
 
@@ -89,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     private fun showSplash(navController: NavController) {
         Handler(Looper.getMainLooper()).postDelayed({
             navController.popBackStack()
-            navController.navigate(R.id.homeFragment)
+            navController.navigate(R.id.nav_home)
         }, 5000)
         splashBinding.splashLottie.visibility = View.GONE
     }
@@ -98,17 +72,17 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val destination = findNavController(R.id.nav_host_fragment).currentDestination?.id
         val navController = findNavController(R.id.nav_host_fragment)
-        if (destination == R.id.homeFragment) {
+        if (destination == R.id.nav_home || destination == R.id.nav_market || destination == R.id.nav_gecko || destination == R.id.nav_portfolio) {
             if (backPressed + 2000 > System.currentTimeMillis()) {
                 super.onBackPressed()
             } else {
-                Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+                showToast("Press back again to exit")
                 backPressed = System.currentTimeMillis()
             }
         } else {
             navController.popBackStack()
         }
-        if (destination == R.id.biometricFragment) {
+        if (destination == R.id.nav_biometric) {
             super.onBackPressed()
         }
     }

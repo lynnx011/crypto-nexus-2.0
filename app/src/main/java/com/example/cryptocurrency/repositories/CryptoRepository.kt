@@ -23,7 +23,7 @@ class CryptoRepository @Inject constructor(
 
     suspend fun getCryptoInfo(symbol: String) = cryptoApi.getCryptoInfo(symbol)
 
-    suspend fun getConversion(amount: Int, symbol: String, convert: String) =
+    suspend fun getConversion(amount: Double, symbol: String, convert: String) =
         cryptoApi.getConversion(amount, symbol, convert)
 
     // Room Database

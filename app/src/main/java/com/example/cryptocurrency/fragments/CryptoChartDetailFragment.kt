@@ -1,7 +1,6 @@
 package com.example.cryptocurrency.fragments
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -15,21 +14,22 @@ import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.FragmentCryptoChartDetailBinding
-import com.example.cryptocurrency.model.CryptoDetails
 import com.example.cryptocurrency.network_detector.NetworkDetector
+import com.example.cryptocurrency.utils.cryptoLogoUrl
+import com.example.cryptocurrency.utils.loadImage
+import com.example.cryptocurrency.utils.popBack
+import com.example.cryptocurrency.utils.setBackgroundColor
+import com.example.cryptocurrency.utils.setBtnBackground
+import com.example.cryptocurrency.utils.setImgDrawable
+import com.example.cryptocurrency.utils.setTextColor
+import com.example.cryptocurrency.utils.showToast
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,10 +37,10 @@ class CryptoChartDetailFragment : Fragment() {
     private lateinit var binding: FragmentCryptoChartDetailBinding
     private lateinit var webView: WebView
     private lateinit var handler: Handler
-    private var dialog: BottomSheetDialog? = null
     private val viewModel: CryptoViewModel by activityViewModels()
-    private var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>? = null
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private val networkDetector by lazy { context?.let { NetworkDetector(it) } }
+    private var isCollapsed = false
 
     override fun onStart() {
         super.onStart()
@@ -112,18 +112,16 @@ class CryptoChartDetailFragment : Fragment() {
                         binding.noConnection.isVisible = true
                     }, 3000)
                 }
-                binding.min15.isEnabled = false
-                binding.min15.setBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.dark_blue1
-                    )
-                )
+
+                binding.min15.apply {
+                    isEnabled = false
+                    setBtnBackground(requireContext(), R.color.dark_blue1)
+                }
 
             }
 
             binding.backKey.setOnClickListener {
-                findNavController().popBackStack()
+                popBack()
             }
 
             val formattedMarketCap = formattedValue(marketCap.toString())
@@ -201,14 +199,25 @@ class CryptoChartDetailFragment : Fragment() {
             caretState(change90d.toDouble(), change90, caret90)
         }
 
-    }
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        binding.bottomSheet.setOnClickListener {
+            when (isCollapsed) {
+                true -> {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    isCollapsed = false
+                }
 
-//    private fun setupDetailsBtmSheet(){
-//        val btmSheetView = layoutInflater.inflate(R.layout.custom_details_btm_sheet,null)
-//        dialog = BottomSheetDialog(requireContext(),R.style.Theme_CryptoCurrency)
-//        dialog!!.setContentView(btmSheetView)
-//        dialog!!.show()
-//    }
+                else -> {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    isCollapsed = true
+                }
+            }
+        }
+
+        bottomSheetDragListener()
+
+    }
 
     private fun cryptoDetailsSetup(
         tokenId: Int,
@@ -221,10 +230,11 @@ class CryptoChartDetailFragment : Fragment() {
             price.text = String.format("$%.6f", tokenPrice)
             percent24h.text = tokenChange24h.toString()
 
-            Glide.with(requireContext())
-                .load("https://s2.coinmarketcap.com/static/img/coins/64x64/${tokenId}.png")
-                .thumbnail(Glide.with(requireContext()).load(R.drawable.loading3))
-                .into(logo)
+            logo.loadImage(
+                requireContext(),
+                cryptoLogoUrl(tokenId),
+                R.drawable.loading3
+            )
 
             caretState(tokenChange24h, percent24h, caret)
         }
@@ -233,10 +243,8 @@ class CryptoChartDetailFragment : Fragment() {
     private fun buttonState(view: View, vararg buttons: View) {
         for (button in buttons) {
             button.setBackgroundColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    if (view == button) R.color.dark_blue1 else R.color.grey3
-                )
+                requireContext(),
+                if (view == button) R.color.dark_blue1 else R.color.grey3
             )
             button.isEnabled = button != view
         }
@@ -254,25 +262,21 @@ class CryptoChartDetailFragment : Fragment() {
 
     private fun caretState(percent: Double, value: TextView, caret: ImageView) {
         if (percent > 0) {
-            value.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+            value.setTextColor(requireContext(), R.color.green)
             value.text = String.format("%.2f%%", percent)
-            caret.setImageDrawable(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.caret_up
-                )
+            caret.setImgDrawable(
+                requireContext(),
+                R.drawable.caret_up
             )
         }
         if (percent < 0) {
             val subPercent = kotlin.math.abs(percent)
             val formattedPercent = String.format("%.2f%%", subPercent)
-            value.setTextColor(ContextCompat.getColor(requireContext(), R.color.chili))
+            value.setTextColor(requireContext(), R.color.chili)
             value.text = formattedPercent.substring(0)
-            caret.setImageDrawable(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.caret_down
-                )
+            caret.setImgDrawable(
+                requireContext(),
+                R.drawable.caret_down
             )
         }
 
@@ -307,8 +311,31 @@ class CryptoChartDetailFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.cryptoDetails.value = null
+    private fun bottomSheetDragListener() {
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+                        binding.swipeTextLayout.visibility = View.GONE
+                    }
+
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        binding.swipeTextLayout.visibility = View.VISIBLE
+                    }
+
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        binding.swipeTextLayout.visibility = View.GONE
+                    }
+
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                bottomSheetBehavior.peekHeight = 130
+            }
+
+        })
     }
+
 }

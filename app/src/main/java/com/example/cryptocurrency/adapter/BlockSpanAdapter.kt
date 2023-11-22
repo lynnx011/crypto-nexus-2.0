@@ -11,6 +11,7 @@ import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.BlockNftItemBinding
 import com.example.cryptocurrency.model.model4.Result
 import com.example.cryptocurrency.model.model4.Stats
+import com.example.cryptocurrency.utils.loadImage
 
 class BlockSpanAdapter(private val onItemClick: ((Result, Stats) -> Unit)?) :
     RecyclerView.Adapter<BlockSpanAdapter.BlockSpanViewHolder>() {
@@ -39,16 +40,19 @@ class BlockSpanAdapter(private val onItemClick: ((Result, Stats) -> Unit)?) :
     }
 
     override fun onBindViewHolder(holder: BlockSpanViewHolder, position: Int) {
-        val nfts = differ.currentList[position]
-        holder.bind(nfts)
-        holder.bindData(nfts.stats)
+        val nft = differ.currentList[position]
+        val context = holder.itemView.context
+        holder.bind(nft)
+        holder.bindData(nft.stats)
         holder.itemView.setOnClickListener {
-            onItemClick?.invoke(nfts, nfts.stats)
+            onItemClick?.invoke(nft, nft.stats)
         }
-        Glide.with(holder.itemView.context).load(nfts.image_url).placeholder(R.drawable.nft1)
+
+        Glide.with(context).load(nft.image_url).placeholder(R.drawable.nft1)
             .into(holder.binding.profile)
-        Glide.with(holder.itemView.context).load(nfts.featured_image_url)
+        Glide.with(context).load(nft.featured_image_url)
             .placeholder(R.drawable.img_1).into(holder.binding.featurePhoto)
+
     }
 
     override fun getItemCount(): Int {

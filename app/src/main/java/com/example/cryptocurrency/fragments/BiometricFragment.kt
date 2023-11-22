@@ -19,9 +19,11 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.FragmentBiometricBinding
+import com.example.cryptocurrency.utils.navigateTo
+import com.example.cryptocurrency.utils.popBack
+import com.example.cryptocurrency.utils.setTextColor
 import java.util.concurrent.Executor
 
 class BiometricFragment : Fragment() {
@@ -31,13 +33,6 @@ class BiometricFragment : Fragment() {
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var biometricPromptInfo: BiometricPrompt.PromptInfo
     private lateinit var handler: Handler
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,8 +64,10 @@ class BiometricFragment : Fragment() {
                 binding.apply {
                     fingerprint.isVisible = false
                     failBiometric.isVisible = true
-                    biometricMsg.text = "Failed!"
-                    biometricMsg.setTextColor(ContextCompat.getColor(requireContext(),R.color.hot_chili))
+                    biometricMsg.apply {
+                        this.text = "Failed!"
+                        setTextColor(requireContext(),R.color.hot_chili)
+                    }
                 }
                 Log.d("biometric","Authentication Failed")
             }
@@ -82,11 +79,13 @@ class BiometricFragment : Fragment() {
                     successBiometric.isVisible = true
                     fingerprint.isVisible = false
                     failBiometric.isVisible = false
-                    biometricMsg.text = "Succeeded!"
-                    biometricMsg.setTextColor(ContextCompat.getColor(requireContext(),R.color.green))
+                    biometricMsg.apply {
+                        this.text = "Failed!"
+                        setTextColor(requireContext(),R.color.green)
+                    }
                     handler.postDelayed({
-                        findNavController().popBackStack()
-                        findNavController().navigate(R.id.homeFragment)
+                        popBack()
+                        navigateTo(R.id.nav_home)
                     },2000)
                 }
                 Log.d("biometric","Authentication Success $result")
@@ -122,7 +121,7 @@ class BiometricFragment : Fragment() {
                     biometricMsg.text = "Biometric feature is currently unavailable"
                 }
                 Handler(Looper.getMainLooper()).postDelayed({
-                    findNavController().navigate(R.id.homeFragment)
+                    navigateTo(R.id.nav_home)
                 },3000)
             }
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
