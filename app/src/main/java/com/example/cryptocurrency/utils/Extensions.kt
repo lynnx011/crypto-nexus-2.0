@@ -21,7 +21,7 @@ import com.example.cryptocurrency.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 
-fun Fragment.cutOffPoint(text: Double): String {
+fun Context.cutOffPoint(text: Double): String {
     return String.format("%.2f", text)
 }
 

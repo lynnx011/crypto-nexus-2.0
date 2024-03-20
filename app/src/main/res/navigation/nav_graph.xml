@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.cryptocurrency.fragments.HomeFragment"
+        android:name="com.example.cryptocurrency.screens.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_market"
-        android:name="com.example.cryptocurrency.fragments.MarketFragment"
+        android:name="com.example.cryptocurrency.screens.MarketFragment"
         android:label="fragment_market"
         tools:layout="@layout/fragment_market" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_portfolio"
-        android:name="com.example.cryptocurrency.fragments.PortfolioFragment"
+        android:name="com.example.cryptocurrency.screens.PortfolioFragment"
         android:label="fragment_watchlist"
         tools:layout="@layout/fragment_portfolio">
         <action
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_top_gainers"
-        android:name="com.example.cryptocurrency.fragments.TopGainersFragment"
+        android:name="com.example.cryptocurrency.screens.TopGainersFragment"
         android:label="fragment_top_gainers"
         tools:layout="@layout/fragment_top_gainers" >
         <action
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_top_losers"
-        android:name="com.example.cryptocurrency.fragments.TopLosersFragment"
+        android:name="com.example.cryptocurrency.screens.TopLosersFragment"
         android:label="fragment_top_losers"
         tools:layout="@layout/fragment_top_losers" >
         <action
@@ -79,12 +79,12 @@
     </fragment>
     <fragment
         android:id="@+id/nav_chart_details"
-        android:name="com.example.cryptocurrency.fragments.CryptoChartDetailFragment"
+        android:name="com.example.cryptocurrency.screens.CryptoChartDetailFragment"
         android:label="fragment_crypto_chart_detail"
         tools:layout="@layout/fragment_crypto_chart_detail" />
     <fragment
         android:id="@+id/nav_add_trans"
-        android:name="com.example.cryptocurrency.fragments.AddTransactionFragment"
+        android:name="com.example.cryptocurrency.screens.AddTransactionFragment"
         android:label="fragment_add_transaction"
         tools:layout="@layout/fragment_add_transaction" >
         <action
@@ -97,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_amount_trans"
-        android:name="com.example.cryptocurrency.fragments.TransactionAmountFragment"
+        android:name="com.example.cryptocurrency.screens.TransactionAmountFragment"
         android:label="fragment_transaction_amount"
         tools:layout="@layout/fragment_transaction_amount" >
 
@@ -111,37 +111,37 @@
     </fragment>
     <fragment
         android:id="@+id/nav_gecko"
-        android:name="com.example.cryptocurrency.fragments.GeckoFragment"
+        android:name="com.example.cryptocurrency.screens.GeckoFragment"
         android:label="fragment_gecko"
         tools:layout="@layout/fragment_gecko" />
     <fragment
         android:id="@+id/nav_news"
-        android:name="com.example.cryptocurrency.fragments.NewsFragment"
+        android:name="com.example.cryptocurrency.screens.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/nav_nft"
-        android:name="com.example.cryptocurrency.fragments.NftsFragment"
+        android:name="com.example.cryptocurrency.screens.NftsFragment"
         android:label="fragment_nfts"
         tools:layout="@layout/fragment_nfts" />
     <fragment
         android:id="@+id/nav_news_details"
-        android:name="com.example.cryptocurrency.fragments.NewsDetailsFragment"
+        android:name="com.example.cryptocurrency.screens.NewsDetailsFragment"
         android:label="fragment_news_details"
         tools:layout="@layout/fragment_news_details" />
     <fragment
         android:id="@+id/nav_block_span_details"
-        android:name="com.example.cryptocurrency.fragments.BlockSpanDetailFragment"
+        android:name="com.example.cryptocurrency.screens.BlockSpanDetailFragment"
         android:label="fragment_block_span_detail"
         tools:layout="@layout/fragment_block_span_detail" />
     <fragment
         android:id="@+id/nav_biometric"
-        android:name="com.example.cryptocurrency.fragments.BiometricFragment"
+        android:name="com.example.cryptocurrency.screens.BiometricFragment"
         android:label="fragment_biometric"
         tools:layout="@layout/fragment_biometric" />
     <fragment
         android:id="@+id/nav_splash"
-        android:name="com.example.cryptocurrency.fragments.SplashFragment"
+        android:name="com.example.cryptocurrency.screens.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" />
 </navigation>

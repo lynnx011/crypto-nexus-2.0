@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.fragments
+package com.example.cryptocurrency.screens
 
 import android.os.Bundle
 import android.os.Handler
@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -26,9 +25,10 @@ import com.example.cryptocurrency.utils.ImageSliderAdapter
 import com.example.cryptocurrency.utils.navigateTo
 import com.example.cryptocurrency.utils.showToast
 import com.example.cryptocurrency.view_model.CryptoViewModel
+import com.example.cryptocurrency.view_model.GeckoViewModel
+import com.example.cryptocurrency.view_model.PortfolioViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 @AndroidEntryPoint
@@ -45,6 +45,8 @@ class HomeFragment : Fragment() {
     private val networkDetector by lazy { context?.let { NetworkDetector(it) } }
 
     private val cryptoViewModel: CryptoViewModel by activityViewModels()
+    private val geckoViewModel: GeckoViewModel by activityViewModels()
+    private val portfolioViewModel: PortfolioViewModel by activityViewModels()
 
     override fun onPause() {
         super.onPause()
@@ -88,13 +90,11 @@ class HomeFragment : Fragment() {
 
         networkDetector?.observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
-                lifecycleScope.launch {
                     cryptoViewModel.topCryptosLiveData.observe(viewLifecycleOwner) { data ->
                         cryptoAdapter.differ.submitList(data)
                         binding.topCircular.isVisible = false
                         Log.d("data", data.toString())
                     }
-                }
 
                 cryptoViewModel.getTopCryptos()
             } else {
@@ -185,14 +185,11 @@ class HomeFragment : Fragment() {
         viewPager.setPageTransformer(transformer)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        cryptoViewModel.onClear()
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        cryptoViewModel.onClear()
+//        geckoViewModel.onClear()
+//        portfolioViewModel.onClear()
+//    }
 
 }

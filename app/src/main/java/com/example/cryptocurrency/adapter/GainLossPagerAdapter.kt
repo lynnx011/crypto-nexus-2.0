@@ -3,8 +3,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.cryptocurrency.fragments.TopGainersFragment
-import com.example.cryptocurrency.fragments.TopLosersFragment
+import com.example.cryptocurrency.screens.TopGainersFragment
+import com.example.cryptocurrency.screens.TopLosersFragment
 
 class GainLossPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(manager,lifecycle){
 

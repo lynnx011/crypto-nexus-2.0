@@ -16,6 +16,7 @@ import com.example.cryptocurrency.databinding.ActivityMainBinding
 import com.example.cryptocurrency.databinding.FragmentSplashBinding
 import com.example.cryptocurrency.utils.showToast
 import com.example.cryptocurrency.view_model.CryptoViewModel
+import com.example.cryptocurrency.view_model.PortfolioViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var splashBinding: FragmentSplashBinding
     private var backPressed: Long = 0
     private val viewModel: CryptoViewModel by viewModels()
+    private val portfolioViewModel: PortfolioViewModel by viewModels()
+    private val geckoViewModel: PortfolioViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

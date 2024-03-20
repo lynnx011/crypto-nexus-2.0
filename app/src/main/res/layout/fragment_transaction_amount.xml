@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.TransactionAmountFragment">
+    tools:context=".screens.TransactionAmountFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.example.cryptocurrency.view_model.CryptoViewModel" />
+            type="com.example.cryptocurrency.view_model.PortfolioViewModel" />
     </data>
 
     <LinearLayout

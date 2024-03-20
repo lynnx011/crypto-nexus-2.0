@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.fragments
+package com.example.cryptocurrency.screens
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build

@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.fragments
+package com.example.cryptocurrency.screens
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -27,7 +27,6 @@ import com.example.cryptocurrency.utils.setBackgroundColor
 import com.example.cryptocurrency.utils.setBtnBackground
 import com.example.cryptocurrency.utils.setImgDrawable
 import com.example.cryptocurrency.utils.setTextColor
-import com.example.cryptocurrency.utils.showToast
 import com.example.cryptocurrency.view_model.CryptoViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,7 +74,7 @@ class CryptoChartDetailFragment : Fragment() {
             val change90d = details?.quote?.USD?.percent_change_90d ?: 0.0
             val cmcRank = details?.cmc_rank ?: 0
             val marketCap = details?.quote?.USD?.market_cap ?: 0.0
-            val maxSupply = details?.max_supply ?: 0
+//            val maxSupply = details?.max_supply ?: 0
             val circulatingSupply = details?.circulating_supply ?: 0.0
             val totalSupply = details?.total_supply ?: 0.0
             val marketPair = details?.num_market_pairs ?: 0
@@ -126,7 +125,7 @@ class CryptoChartDetailFragment : Fragment() {
 
             val formattedMarketCap = formattedValue(marketCap.toString())
             val formattedCirSupply = formattedValue(circulatingSupply.toString())
-            val formattedMax = formattedValue(maxSupply.toString())
+//            val formattedMax = formattedValue(maxSupply.toString())
             val formattedTotal = formattedValue(totalSupply.toString())
             val formattedDilutedMarket = formattedValue(dilutedMarket.toString())
             val formattedMarketDominance = String.format("%.2f%%", marketDominance)
@@ -135,7 +134,7 @@ class CryptoChartDetailFragment : Fragment() {
             setupCryptoDetails(
                 cmcRank.toString(),
                 formattedMarketCap,
-                formattedMax,
+//                formattedMax,
                 formattedCirSupply,
                 formattedTotal,
                 formattedDilutedMarket,
@@ -167,7 +166,7 @@ class CryptoChartDetailFragment : Fragment() {
     private fun setupCryptoDetails(
         cmcRank: String,
         marketCap: String,
-        maxSupply: String,
+//        maxSupply: String,
         circulatingSupply: String,
         totalSupply: String,
         dilutedMarket: String,
@@ -181,7 +180,7 @@ class CryptoChartDetailFragment : Fragment() {
         binding.apply {
             rank.text = "#$cmcRank"
             mCap.text = marketCap
-            mSupply.text = maxSupply
+//            mSupply.text = maxSupply
             cSupply.text = circulatingSupply
             tSupply.text = totalSupply
             binding.dilutedMarket.text = dilutedMarket

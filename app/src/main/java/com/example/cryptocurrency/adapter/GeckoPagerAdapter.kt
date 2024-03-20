@@ -3,8 +3,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.cryptocurrency.fragments.NewsFragment
-import com.example.cryptocurrency.fragments.NftsFragment
+import com.example.cryptocurrency.screens.NewsFragment
+import com.example.cryptocurrency.screens.NftsFragment
 
 class GeckoPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager,lifecycle) {
 

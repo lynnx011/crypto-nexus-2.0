@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.fragments
+package com.example.cryptocurrency.screens
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,11 +14,11 @@ import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.FragmentBlockSpanDetailBinding
 import com.example.cryptocurrency.utils.loadImage
 import com.example.cryptocurrency.utils.popBack
-import com.example.cryptocurrency.view_model.CryptoViewModel
+import com.example.cryptocurrency.view_model.GeckoViewModel
 
 class BlockSpanDetailFragment : Fragment() {
     private lateinit var binding: FragmentBlockSpanDetailBinding
-    private val nftViewModel: CryptoViewModel by activityViewModels()
+    private val nftViewModel: GeckoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

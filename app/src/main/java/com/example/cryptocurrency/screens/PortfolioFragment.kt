@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.fragments
+package com.example.cryptocurrency.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -19,16 +19,17 @@ import com.example.cryptocurrency.utils.SwipeToDeleteCallback
 import com.example.cryptocurrency.utils.cutOffPoint
 import com.example.cryptocurrency.utils.navigateTo
 import com.example.cryptocurrency.utils.navigateWithBundle
-import com.example.cryptocurrency.view_model.CryptoViewModel
+import com.example.cryptocurrency.view_model.PortfolioViewModel
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.IllegalArgumentException
 
 @AndroidEntryPoint
 class PortfolioFragment : Fragment() {
     private lateinit var binding: FragmentPortfolioBinding
     private lateinit var transactionRoomAdapter: TransactionRoomAdapter
-    private val transactionRoomViewModel: CryptoViewModel by activityViewModels()
+    private val portfolioViewModel: PortfolioViewModel by activityViewModels()
     private lateinit var swipeToDeleteCallback: SwipeToDeleteCallback
     private lateinit var remoteConfig: FirebaseRemoteConfig
     private lateinit var remoteConfigSettings: FirebaseRemoteConfigSettings
@@ -47,28 +48,32 @@ class PortfolioFragment : Fragment() {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
             transactionRoomAdapter = TransactionRoomAdapter {
-                val bundle = bundleOf("portfolio_name" to it.name, "portfolio_symbol" to it.symbol)
-                navigateWithBundle(R.id.action_portfolio_to_chart_details, bundle)
+                try {
+                    val bundle = bundleOf("portfolio_name" to it.name, "portfolio_symbol" to it.symbol)
+                    navigateWithBundle(R.id.action_portfolio_to_chart_details, bundle)
+                }catch (e: IllegalArgumentException){
+                    Log.d("exc",e.message.toString())
+                }
             }
             adapter = transactionRoomAdapter
         }
         swipeToDeleteCallback =
-            SwipeToDeleteCallback(transactionRoomViewModel, transactionRoomAdapter)
+            SwipeToDeleteCallback(requireContext(),portfolioViewModel, transactionRoomAdapter)
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(binding.recView)
 
-        transactionRoomViewModel.roomTransaction()
+        portfolioViewModel.roomTransaction()
             .observe(viewLifecycleOwner) { transaction ->
-                transactionRoomAdapter.differ.submitList(transaction)
-                var totalTrans = 0.0
+                transactionRoomAdapter.differ.submitList(transaction.sortedBy { it.usd_amount })
+//                var totalTrans = 0.0
                 for (i in transaction) {
-                    totalTrans += i.usd_amount
+                    portfolioViewModel.totalTrans.value += i.usd_amount
                 }
-                transactionRoomViewModel.totalHoldingValue.value = "$${cutOffPoint(totalTrans)}"
+                portfolioViewModel.totalHoldingValue.value = "$${requireContext().cutOffPoint(portfolioViewModel.totalTrans.value)}"
 
             }
 
-        transactionRoomViewModel.totalHoldingValue.observe(viewLifecycleOwner) { value ->
+        portfolioViewModel.totalHoldingValue.observe(viewLifecycleOwner) { value ->
             binding.totalValue.text = value
         }
 

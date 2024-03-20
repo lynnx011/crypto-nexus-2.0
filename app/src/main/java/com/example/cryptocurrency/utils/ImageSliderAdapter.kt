@@ -32,7 +32,7 @@ class ImageSliderAdapter(
     }
 
     override fun onBindViewHolder(holder: ImageSliderViewHolder, position: Int) {
-        Glide.with(holder.itemView.context).load(imageList[position]).into(binding.imgView)
+        Glide.with(holder.itemView.context).load(imageList[position]).into(holder.binding.imgView)
         if (position == imageList.size - 1) {
             viewPager2.post(runnable)
         }

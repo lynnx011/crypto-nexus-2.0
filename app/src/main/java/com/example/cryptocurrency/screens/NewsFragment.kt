@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.fragments
+package com.example.cryptocurrency.screens
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrency.R
@@ -15,7 +15,7 @@ import com.example.cryptocurrency.adapter.CryptoNewsAdapter
 import com.example.cryptocurrency.databinding.FragmentNewsBinding
 import com.example.cryptocurrency.network_detector.NetworkDetector
 import com.example.cryptocurrency.utils.navigateWithBundle
-import com.example.cryptocurrency.view_model.CryptoViewModel
+import com.example.cryptocurrency.view_model.GeckoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,7 +24,7 @@ class NewsFragment : Fragment() {
     private lateinit var binding: FragmentNewsBinding
     private lateinit var cryptoNewsAdapter: CryptoNewsAdapter
     private val networkDetector  by lazy { context?.let { NetworkDetector(it) } }
-    private val cryptoNewsViewModel: CryptoViewModel by viewModels()
+    private val viewModel: GeckoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,12 +42,12 @@ class NewsFragment : Fragment() {
         networkDetector?.observe(viewLifecycleOwner){ isConnected ->
             if (isConnected){
                 lifecycleScope.launch {
-                    cryptoNewsViewModel.cryptoNewsLiveData.observe(viewLifecycleOwner){ news ->
+                    viewModel.cryptoNewsLiveData.observe(viewLifecycleOwner){ news ->
                         cryptoNewsAdapter.differ.submitList(news)
                         binding.newsCircular.isVisible = false
                     }
                 }
-                cryptoNewsViewModel.getCryptoNews()
+                viewModel.getCryptoNews()
                 binding.noConnection.isVisible = false
             }else{
                 setupRecyclerView()

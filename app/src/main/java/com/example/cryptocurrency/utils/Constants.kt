@@ -11,3 +11,5 @@ object Constants {
     const val NEWS_API_KEY = "d35eefdb54434e38877107bb4991bef9"
     const val BLOCK_SPAN_API_KEY = "H5dZzfE36IqiztXHquMYNG7jwteiE4l8"
 }
+
+var totalTrans = 0.0

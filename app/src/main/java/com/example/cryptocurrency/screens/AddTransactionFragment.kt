@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.fragments
+package com.example.cryptocurrency.screens
 
 import android.os.Bundle
 import android.text.Editable
@@ -21,6 +21,7 @@ import com.example.cryptocurrency.utils.navigateTo
 import com.example.cryptocurrency.utils.popBack
 import com.example.cryptocurrency.utils.setEdtBackgroundColor
 import com.example.cryptocurrency.view_model.CryptoViewModel
+import com.example.cryptocurrency.view_model.PortfolioViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +29,8 @@ class AddTransactionFragment : Fragment() {
     private lateinit var binding: FragmentAddTransactionBinding
     private lateinit var transAdapter: TransactionAdapter
     private val networkDetector by lazy { context?.let { NetworkDetector(it) } }
-    private val transViewModel: CryptoViewModel by activityViewModels()
+    private val viewModel: CryptoViewModel by activityViewModels()
+    private val portfolioViewModel: PortfolioViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +44,7 @@ class AddTransactionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        transViewModel.getMarketData()
+        viewModel.getMarketData()
         binding.addTransCircular.isVisible = true
         binding.searchView.setEdtBackgroundColor(requireContext(),R.color.grey3)
         binding.searchCard.backgroundRes(R.drawable.search_bar_background)
@@ -50,13 +52,13 @@ class AddTransactionFragment : Fragment() {
         networkDetector?.observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
                 setupRecyclerView()
-                transViewModel.marketLiveData.observe(viewLifecycleOwner) { cryptos ->
+                viewModel.marketLiveData.observe(viewLifecycleOwner) { cryptos ->
                     transAdapter.differ.submitList(cryptos)
                     filterItem(cryptos)
                     binding.addTransCircular.isVisible = false
                 }
             } else {
-                transViewModel.getRoomCryptos().observe(viewLifecycleOwner) { cryptos ->
+                portfolioViewModel.getRoomCryptos().observe(viewLifecycleOwner) { cryptos ->
                     transAdapter.differ.submitList(cryptos)
                     filterItem(cryptos)
                     binding.addTransCircular.isVisible = false
@@ -76,7 +78,7 @@ class AddTransactionFragment : Fragment() {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             transAdapter = TransactionAdapter { details ->
-                transViewModel.cryptoDetails.value = details
+                viewModel.cryptoDetails.value = details
                 navigateTo(R.id.action_add_trans_to_amount_trans)
             }
             adapter = transAdapter

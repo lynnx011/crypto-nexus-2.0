@@ -1,7 +1,9 @@
 package com.example.cryptocurrency.api_service
+import androidx.lifecycle.LiveData
 import com.example.cryptocurrency.model.CryptoModel
 import com.example.cryptocurrency.model.model2.CryptoInfoModel
 import com.example.cryptocurrency.model.model3.ConversionModel
+import com.example.cryptocurrency.utils.ApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

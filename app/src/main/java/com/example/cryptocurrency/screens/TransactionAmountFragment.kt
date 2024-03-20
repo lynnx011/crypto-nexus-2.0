@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.fragments
+package com.example.cryptocurrency.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -17,12 +17,14 @@ import com.example.cryptocurrency.utils.navigateTo
 import com.example.cryptocurrency.utils.popBack
 import com.example.cryptocurrency.utils.setBackgroundColor
 import com.example.cryptocurrency.view_model.CryptoViewModel
+import com.example.cryptocurrency.view_model.PortfolioViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TransactionAmountFragment : Fragment() {
     private lateinit var binding: FragmentTransactionAmountBinding
-    private val transactionViewModel: CryptoViewModel by activityViewModels()
+    private val portfolioViewModel: PortfolioViewModel by activityViewModels()
+    private val viewModel: CryptoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,11 +45,11 @@ class TransactionAmountFragment : Fragment() {
 
         initViewModel()
 
-        val cryptoName = transactionViewModel.cryptoDetails.value?.name
-        val cryptoSymbol = transactionViewModel.cryptoDetails.value?.symbol
-        val cryptoId = transactionViewModel.cryptoDetails.value?.id
-        val price = transactionViewModel.cryptoDetails.value?.quote?.USD?.price
-        val percent24h = transactionViewModel.cryptoDetails.value?.quote?.USD?.percent_change_24h
+        val cryptoName = viewModel.cryptoDetails.value?.name
+        val cryptoSymbol = viewModel.cryptoDetails.value?.symbol
+        val cryptoId = viewModel.cryptoDetails.value?.id
+        val price = viewModel.cryptoDetails.value?.quote?.USD?.price
+        val percent24h = viewModel.cryptoDetails.value?.quote?.USD?.percent_change_24h
 
         binding.apply {
             symbol.text = cryptoSymbol.orEmpty()
@@ -70,25 +72,25 @@ class TransactionAmountFragment : Fragment() {
                     cryptoName.toString(),
                     cryptoSymbol.toString(),
                     price ?: 0.0,
-                    transactionViewModel.convertResult.value?.toString()?.toDouble() ?: 0.0,
-                    transactionViewModel.convertAmount.value.toString().toDouble(),
+                    portfolioViewModel.convertResult.value?.toString()?.toDouble() ?: 0.0,
+                    portfolioViewModel.convertAmount.value.toString().toDouble(),
                     percent24h.toString().toDouble()
                 )
             } catch (e: Exception) {
                 Log.d("insert-transaction", e.toString())
             }
-            transactionViewModel.convertAmount.value = ""
+            portfolioViewModel.convertAmount.value = ""
         }
 
-        transactionViewModel.convertAmount.observe(viewLifecycleOwner) {
-            transactionViewModel.transBtnValid()
-            if (it != "") transactionViewModel.getCryptoConversion(cryptoSymbol!!)
-            else transactionViewModel.convertResult.value = "0.0"
+        portfolioViewModel.convertAmount.observe(viewLifecycleOwner) {
+            portfolioViewModel.transBtnValid()
+            if (it != "") portfolioViewModel.getCryptoConversion(cryptoSymbol!!)
+            else portfolioViewModel.convertResult.value = "0.0"
         }
 
-        transactionViewModel.convertResult.observe(viewLifecycleOwner) {
-            transactionViewModel.transBtnValid()
-            if (it.toDouble() == 0.0 || transactionViewModel.convertAmount.value.isNullOrEmpty()) binding.transBtn.setBackgroundColor(
+        portfolioViewModel.convertResult.observe(viewLifecycleOwner) {
+            portfolioViewModel.transBtnValid()
+            if (it.toDouble() == 0.0 || portfolioViewModel.convertAmount.value.isNullOrEmpty()) binding.transBtn.setBackgroundColor(
                 requireContext(),
                 R.color.grey4
             )
@@ -105,7 +107,7 @@ class TransactionAmountFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        binding.viewModel = transactionViewModel
+        binding.viewModel = portfolioViewModel
         binding.lifecycleOwner = viewLifecycleOwner
     }
 
@@ -127,7 +129,7 @@ class TransactionAmountFragment : Fragment() {
             token_amount = tokenAmount,
             percent_change = percentChange
         )
-        transactionViewModel.insertTransaction(transaction)
+        portfolioViewModel.insertTransaction(transaction)
         popBack()
         navigateTo(R.id.nav_portfolio)
     }

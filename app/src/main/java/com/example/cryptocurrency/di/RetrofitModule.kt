@@ -1,4 +1,8 @@
 package com.example.cryptocurrency.di
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
 import com.example.cryptocurrency.api_service.BlockSpanApi
 import com.example.cryptocurrency.api_service.CryptoApi
 import com.example.cryptocurrency.api_service.CryptoNewsApi
@@ -7,6 +11,7 @@ import com.example.cryptocurrency.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -21,8 +26,25 @@ object RetrofitModule {
 
     @Provides
     @Singleton
+    fun provideChuckerCollector(@ApplicationContext context: Context): ChuckerCollector = ChuckerCollector(
+        context = context,
+        showNotification = true,
+        retentionPeriod = RetentionManager.Period.ONE_DAY
+    )
+
+    @Provides
+    @Singleton
+    @Named("Chucker")
+    fun provideChuckerInterceptor(@ApplicationContext context: Context, collector: ChuckerCollector): ChuckerInterceptor = ChuckerInterceptor.Builder(context = context)
+        .collector(collector = collector)
+        .maxContentLength(250000L)
+        .alwaysReadResponseBody(true)
+        .build()
+
+    @Provides
+    @Singleton
     @Named("CoinMarketCap")
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
+    fun provideOkHttpClient(@Named("Chucker")interceptor: ChuckerInterceptor): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val request = chain.request()
             val newRequest = request.newBuilder()
@@ -30,6 +52,7 @@ object RetrofitModule {
                 .build()
             chain.proceed(newRequest)
         }
+        .addInterceptor(interceptor = interceptor)
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
@@ -51,7 +74,7 @@ object RetrofitModule {
     @Provides
     @Singleton
     @Named("CryptoNews")
-    fun provideOkHttpClient1(): OkHttpClient = OkHttpClient.Builder()
+    fun provideOkHttpClient1(@Named("Chucker")interceptor: ChuckerInterceptor): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val request = chain.request()
             val newRequest = request.newBuilder()
@@ -59,6 +82,7 @@ object RetrofitModule {
                 .build()
             chain.proceed(newRequest)
         }
+        .addInterceptor(interceptor = interceptor)
         .connectTimeout(60, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
@@ -77,13 +101,14 @@ object RetrofitModule {
     @Provides
     @Singleton
     @Named("CoinGecko")
-    fun provideOkHttpClient2(): OkHttpClient = OkHttpClient.Builder()
+    fun provideOkHttpClient2(@Named("Chucker")interceptor: ChuckerInterceptor): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val request = chain.request()
             val newRequest = request.newBuilder()
                 .build()
             chain.proceed(newRequest)
         }
+        .addInterceptor(interceptor = interceptor)
         .connectTimeout(60, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
@@ -102,7 +127,7 @@ object RetrofitModule {
     @Provides
     @Singleton
     @Named("BlockSpan")
-    fun provideOkHttpClient3(): OkHttpClient = OkHttpClient.Builder()
+    fun provideOkHttpClient3(@Named("Chucker")interceptor: ChuckerInterceptor): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val request = chain.request()
             val newRequest = request.newBuilder()
@@ -110,6 +135,7 @@ object RetrofitModule {
                 .build()
             chain.proceed(newRequest)
         }
+        .addInterceptor(interceptor = interceptor)
         .connectTimeout(60, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
