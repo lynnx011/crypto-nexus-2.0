@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="crypto"
-            type="com.example.cryptocurrency.model.CryptoDetails" />
+            name="detail"
+            type="com.example.cryptocurrency.domain.model.CryptoDetails" />
         <variable
-            name="crypto1"
-            type="com.example.cryptocurrency.model.USD" />
+            name="usd"
+            type="com.example.cryptocurrency.domain.model.CryptoUsd" />
     </data>
     <androidx.cardview.widget.CardView
         android:id="@+id/topCryptoCard"
@@ -56,7 +56,7 @@
                         android:id="@+id/cryptoSymbol"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{crypto.symbol}"
+                        android:text="@{detail.symbol}"
                         android:fontFamily="@font/almarai_regular"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -67,7 +67,7 @@
                         android:id="@+id/cryptoName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{crypto.name}"
+                        android:text="@{detail.name}"
                         android:fontFamily="@font/gruppo_regular"
                         android:textSize="12sp"
                         android:textColor="@color/grey4"
@@ -81,7 +81,7 @@
                 android:id="@+id/cryptoPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:formatText="@{crypto1.price}"
+                app:formatText="@{usd.price}"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/gruppo_regular"

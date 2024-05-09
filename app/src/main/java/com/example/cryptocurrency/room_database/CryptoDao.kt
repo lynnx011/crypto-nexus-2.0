@@ -1,8 +1,15 @@
 package com.example.cryptocurrency.room_database
+
 import androidx.lifecycle.LiveData
-import androidx.room.*
-import com.example.cryptocurrency.model.CryptoDetails
-import com.example.cryptocurrency.model.transaction.TransactionModel
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
+import com.example.cryptocurrency.domain.model.CryptoDetails
+import com.example.cryptocurrency.domain.model.Transaction
+
 
 @Dao
 interface CryptoDao {
@@ -17,18 +24,18 @@ interface CryptoDao {
     suspend fun deleteCryptos()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTransaction(transaction: TransactionModel)
+    suspend fun insertTransaction(transaction: Transaction)
 
     @Update
-    suspend fun updateTransaction(transaction: TransactionModel)
+    suspend fun updateTransaction(transaction: Transaction)
 
     @Query("SELECT * FROM transaction_model")
-    fun getTransaction() : LiveData<List<TransactionModel>>
+    fun getTransaction() : LiveData<List<Transaction>>
 
     @Query("SELECT * FROM transaction_model WHERE id = :id")
-    suspend fun getTransactionByID(id: String): TransactionModel
+    suspend fun getTransactionByID(id: String): Transaction
 
     @Delete
-    fun deleteTransaction(transaction: TransactionModel)
+    fun deleteTransaction(transaction: Transaction)
 
 }

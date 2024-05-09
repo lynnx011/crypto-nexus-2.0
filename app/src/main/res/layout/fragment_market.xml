@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".screens.MarketFragment">
+    tools:context=".presentation.screens.MarketFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,12 +73,13 @@
                                 android:paddingBottom="64dp"
                                 tools:listitem="@layout/top_gainers_item" />
                             <com.airbnb.lottie.LottieAnimationView
-                                android:id="@+id/marketCircular"
+                                android:id="@+id/circular"
                                 android:layout_width="50dp"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center"
                                 app:lottie_autoPlay="true"
                                 app:lottie_loop="true"
+                                android:visibility="gone"
                                 app:lottie_rawRes="@raw/assistagro_loading_bars" />
                         </FrameLayout>
 

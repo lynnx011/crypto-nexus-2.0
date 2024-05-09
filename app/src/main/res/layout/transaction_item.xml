@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="crypto"
-            type="com.example.cryptocurrency.model.CryptoDetails" />
+            name="detail"
+            type="com.example.cryptocurrency.domain.model.CryptoDetails" />
         <variable
-            name="crypto1"
-            type="com.example.cryptocurrency.model.USD" />
+            name="usd"
+            type="com.example.cryptocurrency.domain.model.CryptoUsd" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -39,14 +39,14 @@
                         android:id="@+id/transLogo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:loadImageId="@{crypto.id}"
+                        app:loadImageId="@{detail.id}"
                         tools:ignore="ContentDescription" />
                 </androidx.cardview.widget.CardView>
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{crypto.name}"
+                    android:text="@{detail.name}"
                     android:textSize="16sp"
                     android:fontFamily="@font/josefin_sans_regular"
                     android:textColor="@color/white"
@@ -58,7 +58,7 @@
                     android:id="@+id/symbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{crypto.symbol}"
+                    android:text="@{detail.symbol}"
                     android:fontFamily="@font/josefin_sans_regular"
                     android:layout_marginHorizontal="10dp"
                     android:textColor="@color/grey4"

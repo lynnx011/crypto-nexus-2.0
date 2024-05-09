@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".screens.TransactionAmountFragment">
+    tools:context=".presentation.screens.TransactionAmountFragment">
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.example.cryptocurrency.view_model.PortfolioViewModel" />
-    </data>
+<!--    <data>-->
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.example.cryptocurrency.view_model.PortfolioViewModel" />-->
+<!--    </data>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,7 +110,7 @@
                         android:fontFamily="@font/josefin_sans_regular"
                         android:hint="0"
                         android:digits="0123456789."
-                        android:text="@={viewModel.convertAmount}"
+                        android:text="viewModel.convertAmount"
                         android:inputType="number"
                         android:textColor="@color/light_grey"
                         android:textColorHint="@color/grey4"
@@ -176,7 +176,7 @@
                         android:layout_marginBottom="30dp"
                         android:fontFamily="@font/josefin_sans_regular"
                         android:letterSpacing="0.06"
-                        android:text="@{viewModel.convertResult}"
+                        android:text="viewModel.convertResult"
                         android:textColor="@color/grey5"
                         android:textSize="22sp"
                         android:textStyle="bold" />
@@ -203,7 +203,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:enabled="@{viewModel.isTransBtnValid}"
+                    android:enabled="false"
                     android:textStyle="bold"
                     app:cornerRadius="8dp" />
             </LinearLayout>

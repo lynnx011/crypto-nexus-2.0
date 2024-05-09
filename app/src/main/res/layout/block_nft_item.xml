@@ -5,10 +5,10 @@
     <data>
         <variable
             name="nft"
-            type="com.example.cryptocurrency.model.model4.Result" />
+            type="com.example.cryptocurrency.domain.model.BlockSpanResult" />
         <variable
             name="stat"
-            type="com.example.cryptocurrency.model.model4.Stats" />
+            type="com.example.cryptocurrency.domain.model.BlockSpanStats" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="184dp"
@@ -86,7 +86,7 @@
                         android:id="@+id/ethPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:formatString="@{stat.total_supply}"
+                        app:formatString="@{stat.totalSupply}"
                         android:textSize="14sp"
                         android:fontFamily="@font/josefin_sans_regular"
                         android:padding="2dp"
@@ -114,7 +114,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:formatDouble="@{stat.total_volume}"
+                        app:formatDouble="@{stat.totalVolume}"
                         android:fontFamily="@font/josefin_sans_regular"
                         android:textSize="14sp"
                         android:layout_gravity="end"

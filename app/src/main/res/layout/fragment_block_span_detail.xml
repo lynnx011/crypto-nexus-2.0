@@ -3,228 +3,178 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.BlockSpanDetailFragment">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/light_black"
-    tools:ignore="UselessLeaf">
-    <com.google.android.material.appbar.MaterialToolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/backKey"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:padding="8dp"
-            android:src="@drawable/arrow_back_ios"
-            tools:ignore="ContentDescription" />
-        <TextView
-            android:id="@+id/toolbarTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:fontFamily="@font/josefin_sans_regular"
-            android:textSize="16sp"
-            android:layout_gravity="center"
-            android:letterSpacing="0.04"
-            android:textStyle="bold"
-            android:textColor="@color/grey5"/>
-    </com.google.android.material.appbar.MaterialToolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="14dp"
-        android:orientation="vertical">
-        <androidx.cardview.widget.CardView
+        android:orientation="vertical"
+        android:background="@color/light_black"
+        tools:ignore="UselessLeaf">
+        <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
-            android:layout_height="520dp"
-            app:cardCornerRadius="10dp"
-            android:layout_marginTop="6dp"
-            android:backgroundTint="@color/dark_grey"
-            app:cardElevation="60dp">
-            <LinearLayout
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/backKey"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:padding="8dp"
+                android:src="@drawable/arrow_back_ios"
+                tools:ignore="ContentDescription" />
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:fontFamily="@font/josefin_sans_regular"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:letterSpacing="0.04"
+                android:textStyle="bold"
+                android:textColor="@color/grey5"/>
+        </com.google.android.material.appbar.MaterialToolbar>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="14dp"
+            android:orientation="vertical">
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
-                android:orientation="vertical">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    app:cardCornerRadius="10dp"
-                    android:outlineSpotShadowColor="@color/dark_grey"
-                    app:cardElevation="40dp">
-                    <ImageView
-                        android:id="@+id/featured"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        tools:ignore="ContentDescription" />
-                </androidx.cardview.widget.CardView>
+                android:layout_height="520dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="@color/dark_grey"
+                app:cardElevation="60dp">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="14dp"
+                    android:layout_marginVertical="10dp"
                     android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:cardCornerRadius="10dp"
+                        android:outlineSpotShadowColor="@color/dark_grey"
+                        app:cardElevation="40dp">
+                        <ImageView
+                            android:id="@+id/featured"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            tools:ignore="ContentDescription" />
+                    </androidx.cardview.widget.CardView>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="14dp"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/studio"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="20dp"
+                                android:fontFamily="@font/almarai_regular"
+                                android:letterSpacing="0.02"
+                                android:textStyle="bold"
+                                android:textColor="@color/tangerine"/>
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/opensea"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                app:cardCornerRadius="250dp"
+                                android:layout_gravity="center"
+                                android:outlineSpotShadowColor="@color/dark_grey"
+                                app:cardElevation="60dp">
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/opensea2"
+                                    android:scaleType="centerCrop"
+                                    tools:ignore="ContentDescription" />
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
                         <TextView
-                            android:id="@+id/studio"
-                            android:layout_width="0dp"
+                            android:id="@+id/projectName"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
-                            android:textSize="16sp"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="20dp"
-                            android:fontFamily="@font/almarai_regular"
-                            android:letterSpacing="0.02"
+                            android:fontFamily="@font/josefin_sans_regular"
+                            android:textSize="18sp"
+                            android:letterSpacing="0.04"
+                            android:layout_marginVertical="4dp"
                             android:textStyle="bold"
-                            android:textColor="@color/tangerine"/>
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/opensea"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            app:cardCornerRadius="250dp"
-                            android:layout_gravity="center"
-                            android:outlineSpotShadowColor="@color/dark_grey"
-                            app:cardElevation="60dp">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/opensea2"
-                                android:scaleType="centerCrop"
-                                tools:ignore="ContentDescription" />
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/projectName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:fontFamily="@font/josefin_sans_regular"
-                        android:textSize="18sp"
-                        android:letterSpacing="0.04"
-                        android:layout_marginVertical="4dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey5"/>
+                            android:textColor="@color/grey5"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="horizontal">
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            tools:ignore="UselessParent">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Total Supply"
-                                android:textSize="14sp"
-                                android:layout_marginTop="6dp"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/almarai_regular"
-                                android:letterSpacing="0.02"
-                                android:textStyle="bold"
-                                android:textColor="@color/tangerine"
-                                tools:ignore="HardcodedText" />
-                            <TextView
-                                android:id="@+id/totalSupply"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:fontFamily="@font/josefin_sans_regular"
-                                android:textSize="18sp"
-                                android:layout_marginHorizontal="6dp"
-                                android:layout_gravity="center"
-                                android:letterSpacing="0.04"
-                                android:layout_marginVertical="4dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/grey5"/>
-                        </LinearLayout>
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="50dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
                             android:layout_marginTop="12dp"
-                            android:background="@color/grey3"/>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            tools:ignore="UselessParent">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Owners"
-                                android:textSize="14sp"
-                                android:layout_marginTop="6dp"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/almarai_regular"
-                                android:letterSpacing="0.02"
-                                android:textStyle="bold"
-                                android:textColor="@color/tangerine"
-                                tools:ignore="HardcodedText" />
-                            <TextView
-                                android:id="@+id/totalOwner"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:fontFamily="@font/josefin_sans_regular"
-                                android:textSize="18sp"
-                                android:layout_gravity="center"
-                                android:letterSpacing="0.04"
-                                android:layout_marginVertical="4dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/grey5"/>
-                        </LinearLayout>
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@color/grey3"/>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            tools:ignore="UselessParent">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Total Volume"
-                                android:textSize="14sp"
-                                android:layout_marginTop="6dp"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/almarai_regular"
-                                android:letterSpacing="0.02"
-                                android:textStyle="bold"
-                                android:textColor="@color/tangerine"
-                                tools:ignore="HardcodedText" />
+                            android:layout_marginBottom="4dp"
+                            android:orientation="horizontal">
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginHorizontal="6dp"
-                                android:layout_marginVertical="4dp"
-                                android:orientation="horizontal"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <ImageView
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ethereum"
-                                    tools:ignore="ContentDescription,TooDeepLayout" />
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                tools:ignore="UselessParent">
                                 <TextView
-                                    android:id="@+id/totalVolume"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total Supply"
+                                    android:textSize="14sp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/almarai_regular"
+                                    android:letterSpacing="0.02"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/tangerine"
+                                    tools:ignore="HardcodedText" />
+                                <TextView
+                                    android:id="@+id/totalSupply"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:fontFamily="@font/josefin_sans_regular"
+                                    android:textSize="18sp"
+                                    android:layout_marginHorizontal="6dp"
+                                    android:layout_gravity="center"
+                                    android:letterSpacing="0.04"
+                                    android:layout_marginVertical="4dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/grey5"/>
+                            </LinearLayout>
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@color/grey3"/>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                tools:ignore="UselessParent">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Owners"
+                                    android:textSize="14sp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/almarai_regular"
+                                    android:letterSpacing="0.02"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/tangerine"
+                                    tools:ignore="HardcodedText" />
+                                <TextView
+                                    android:id="@+id/totalOwner"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text=""
@@ -232,33 +182,83 @@
                                     android:textSize="18sp"
                                     android:layout_gravity="center"
                                     android:letterSpacing="0.04"
+                                    android:layout_marginVertical="4dp"
                                     android:textStyle="bold"
-                                    android:layout_marginStart="4dp"
-                                    android:layout_marginEnd="6dp"
                                     android:textColor="@color/grey5"/>
                             </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@color/grey3"/>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                tools:ignore="UselessParent">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total Volume"
+                                    android:textSize="14sp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/almarai_regular"
+                                    android:letterSpacing="0.02"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/tangerine"
+                                    tools:ignore="HardcodedText" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginHorizontal="6dp"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal"
+                                    tools:ignore="UseCompoundDrawables">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            app:cardElevation="40dp"
+                                    <ImageView
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ethereum"
+                                        tools:ignore="ContentDescription,TooDeepLayout" />
+                                    <TextView
+                                        android:id="@+id/totalVolume"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:fontFamily="@font/josefin_sans_regular"
+                                        android:textSize="18sp"
+                                        android:layout_gravity="center"
+                                        android:letterSpacing="0.04"
+                                        android:textStyle="bold"
+                                        android:layout_marginStart="4dp"
+                                        android:layout_marginEnd="6dp"
+                                        android:textColor="@color/grey5"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="6dp"
                             android:layout_gravity="center"
-                            app:cardCornerRadius="250dp">
-                            <ImageView
-                                android:id="@+id/profile"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                tools:ignore="ContentDescription" />
-                        </androidx.cardview.widget.CardView>
+                            android:orientation="horizontal">
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                app:cardElevation="40dp"
+                                android:layout_gravity="center"
+                                app:cardCornerRadius="250dp">
+                                <ImageView
+                                    android:id="@+id/profile"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"
+                                    tools:ignore="ContentDescription" />
+                            </androidx.cardview.widget.CardView>
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -287,29 +287,29 @@
                                     android:textColor="@color/tangerine"/>
                             </LinearLayout>
 
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingBottom="14dp">
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
+            </androidx.cardview.widget.CardView>
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:fontFamily="@font/josefin_sans_regular"
-                android:layout_marginTop="2dp"
-                android:textSize="16sp"
-                android:letterSpacing="0.02"
-                android:textStyle="bold"
-                android:textColor="@color/grey5"/>
-        </androidx.core.widget.NestedScrollView>
+                android:layout_marginTop="20dp"
+                android:paddingBottom="14dp">
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/josefin_sans_regular"
+                    android:layout_marginTop="2dp"
+                    android:textSize="16sp"
+                    android:letterSpacing="0.02"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey5"/>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-</LinearLayout>
 </layout>

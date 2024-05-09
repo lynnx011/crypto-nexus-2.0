@@ -7,7 +7,7 @@
 
         <variable
             name="trans"
-            type="com.example.cryptocurrency.model.transaction.TransactionModel" />
+            type="com.example.cryptocurrency.domain.model.Transaction" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -67,7 +67,7 @@
                             android:letterSpacing="0.02"
                             android:padding="2dp"
                             android:fontFamily="@font/josefin_sans_regular"
-                            android:text="@{trans.name}"
+                            android:text="trans.name"
                             android:textColor="@color/grey5"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -78,7 +78,7 @@
                             android:layout_height="wrap_content"
                             android:letterSpacing="0.02"
                             android:padding="2dp"
-                            android:text="@{trans.symbol}"
+                            android:text="trans.symbol"
                             android:fontFamily="@font/josefin_sans_regular"
                             android:textColor="@color/grey4"
                             android:textSize="14sp" />
@@ -103,8 +103,8 @@
                     android:fontFamily="@font/josefin_sans_regular"
                     android:textColor="@color/grey5"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:formatTransDouble="@{trans.current_price}" />
+                    android:textStyle="bold"/>
+<!--                    app:formatTransDouble="trans.currentPrice" />-->
 
                 <TextView
                     android:id="@+id/percent"
@@ -115,8 +115,8 @@
                     android:padding="2dp"
                     android:fontFamily="@font/josefin_sans_regular"
                     android:textColor="@color/grey4"
-                    android:textSize="14sp"
-                    app:formatTransDouble="@{trans.percent_change}" />
+                    android:textSize="14sp"/>
+<!--                    app:formatTransDouble="trans.percentChange" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -136,8 +136,8 @@
                     android:textColor="@color/grey5"
                     android:fontFamily="@font/josefin_sans_regular"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:formatTransDouble="@{trans.usd_amount}" />
+                    android:textStyle="bold"/>
+<!--                    app:formatTransDouble="trans.usdAmount" />-->
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -151,7 +151,7 @@
                         android:letterSpacing="0.02"
                         android:padding="2dp"
                         android:fontFamily="@font/josefin_sans_regular"
-                        android:text="@{trans.symbol}"
+                        android:text="trans.symbol"
                         android:textColor="@color/grey2"
                         android:textSize="14sp" />
 
@@ -162,8 +162,8 @@
                         android:padding="2dp"
                         android:fontFamily="@font/josefin_sans_regular"
                         android:textColor="@color/grey4"
-                        android:textSize="14sp"
-                        app:formatTransaction="@{trans.token_amount}" />
+                        android:textSize="14sp"/>
+<!--                        app:formatTransaction="trans.tokenAmount" />-->
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

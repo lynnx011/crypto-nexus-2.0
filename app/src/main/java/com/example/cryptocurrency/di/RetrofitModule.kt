@@ -3,10 +3,10 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
-import com.example.cryptocurrency.api_service.BlockSpanApi
-import com.example.cryptocurrency.api_service.CryptoApi
-import com.example.cryptocurrency.api_service.CryptoNewsApi
-import com.example.cryptocurrency.api_service.GeckoApi
+import com.example.cryptocurrency.data.remote.api_services.api_service.BlockSpanApi
+import com.example.cryptocurrency.data.remote.api_services.api_service.CryptoApi
+import com.example.cryptocurrency.data.remote.api_services.api_service.CryptoNewsApi
+import com.example.cryptocurrency.data.remote.api_services.api_service.GeckoApi
 import com.example.cryptocurrency.utils.Constants
 import dagger.Module
 import dagger.Provides

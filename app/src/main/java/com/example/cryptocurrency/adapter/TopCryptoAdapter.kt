@@ -3,32 +3,30 @@ package com.example.cryptocurrency.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.TopCryptoItemsBinding
-import com.example.cryptocurrency.model.CryptoDetails
-import com.example.cryptocurrency.model.USD
+import com.example.cryptocurrency.domain.model.CryptoDetails
+import com.example.cryptocurrency.domain.model.CryptoUsd
 import com.example.cryptocurrency.utils.cryptoLogoUrl
 import com.example.cryptocurrency.utils.cryptoSparklineUrl
 import com.example.cryptocurrency.utils.setTextColor
 
-class TopCryptoAdapter(private val onItemClick: ((CryptoDetails) -> Unit)? = null) :
+class TopCryptoAdapter(private val onItemClick: ((CryptoDetails?) -> Unit)? = null) :
     RecyclerView.Adapter<TopCryptoAdapter.TopCryptoViewHolder>() {
-    private lateinit var binding: TopCryptoItemsBinding
 
     class TopCryptoViewHolder(val binding: TopCryptoItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(crypto: CryptoDetails) {
-            binding.crypto = crypto
+            binding.detail = crypto
             binding.executePendingBindings()
         }
 
-        fun bindData(data: USD) {
-            binding.crypto1 = data
+        fun bindData(data: CryptoUsd?) {
+            binding.usd = data
             binding.executePendingBindings()
         }
 
@@ -36,7 +34,7 @@ class TopCryptoAdapter(private val onItemClick: ((CryptoDetails) -> Unit)? = nul
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopCryptoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        binding = DataBindingUtil.inflate(inflater, R.layout.top_crypto_items, parent, false)
+        val binding = TopCryptoItemsBinding.inflate(inflater,parent,false)
         return TopCryptoViewHolder(binding)
     }
 
@@ -44,9 +42,9 @@ class TopCryptoAdapter(private val onItemClick: ((CryptoDetails) -> Unit)? = nul
     override fun onBindViewHolder(holder: TopCryptoViewHolder, position: Int) {
         val cryptos = differ.currentList[position]
         val context = holder.itemView.context
-        val change24h = cryptos.quote.USD.percent_change_24h
+        val change24h = cryptos.quote?.usd?.percentChange24h
         holder.bind(cryptos)
-        holder.bindData(cryptos.quote.USD)
+        holder.bindData(cryptos.quote?.usd)
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(cryptos)
         }
@@ -55,19 +53,28 @@ class TopCryptoAdapter(private val onItemClick: ((CryptoDetails) -> Unit)? = nul
             .thumbnail(Glide.with(context).load(R.drawable.loading3))
             .into(holder.binding.cryptoLogo)
 
+//        holder.binding.apply {
+//            cryptoLogo.loadWithCoil(cryptoLogoUrl(cryptos.id)){
+//                R.drawable.loading3
+//            }
+//            cryptoChart.loadWithCoil(cryptoSparklineUrl(cryptos.id)){
+//                R.drawable.more
+//            }
+//        }
+
         Glide.with(context)
             .load(cryptoSparklineUrl(cryptos.id))
             .thumbnail(Glide.with(context).load(R.drawable.more))
             .into(holder.binding.cryptoChart)
 
-        if ( change24h > 0.000) {
+        if ((change24h ?: 0.0) > 0.000) {
             holder.binding.change24h.setTextColor(
                 context,
                 R.color.green
             )
             holder.binding.change24h.text = String.format("+%.2f%%", change24h)
         }
-        if (change24h < 0) {
+        if ((change24h ?: 0.0) < 0) {
             holder.binding.change24h.setTextColor(
                 context,
                 R.color.chili

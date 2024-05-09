@@ -2,21 +2,17 @@ package com.example.cryptocurrency.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.HoldingItemBinding
-import com.example.cryptocurrency.model.USD
-import com.example.cryptocurrency.model.transaction.TransactionModel
-import com.example.cryptocurrency.utils.cryptoLogoUrl
+import com.example.cryptocurrency.domain.model.Transaction
 import com.example.cryptocurrency.utils.loadImage
 import com.example.cryptocurrency.utils.setTextColor
 
-class TransactionRoomAdapter(private val onItemClick: ((TransactionModel) -> Unit)?) :
+class TransactionRoomAdapter(private val onItemClick: ((Transaction) -> Unit)?) :
     RecyclerView.Adapter<TransactionRoomAdapter.TransactionRoomViewHolder>() {
 
     private lateinit var binding: HoldingItemBinding
@@ -30,7 +26,7 @@ class TransactionRoomAdapter(private val onItemClick: ((TransactionModel) -> Uni
 
     class TransactionRoomViewHolder(val binding: HoldingItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(trans: TransactionModel) {
+        fun bind(trans: Transaction) {
             binding.trans = trans
             binding.executePendingBindings()
         }
@@ -53,18 +49,18 @@ class TransactionRoomAdapter(private val onItemClick: ((TransactionModel) -> Uni
 
         binding.logo.loadImage(context, "https://s2.coinmarketcap.com/static/img/coins/64x64/${transactions.id}.png", R.drawable.loading3)
 
-        if (transactions.percent_change > 0.000) {
+        if (transactions.percentChange > 0.000) {
 
             binding.percent.apply {
                 this.setTextColor(context, R.color.green)
-                this.text = String.format("+%.2f%%", transactions.percent_change)
+                this.text = String.format("+%.2f%%", transactions.percentChange)
             }
 
         }
-        if (transactions.percent_change < 0) {
+        if (transactions.percentChange < 0) {
             binding.percent.apply {
                 this.setTextColor(context, R.color.chili)
-                this.text = String.format("%.2f%%", transactions.percent_change)
+                this.text = String.format("%.2f%%", transactions.percentChange)
             }
         }
     }
@@ -73,18 +69,18 @@ class TransactionRoomAdapter(private val onItemClick: ((TransactionModel) -> Uni
         return differ.currentList.size
     }
 
-    private val diffUtil = object : DiffUtil.ItemCallback<TransactionModel>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<Transaction>() {
 
         override fun areItemsTheSame(
-            oldItem: TransactionModel,
-            newItem: TransactionModel
+            oldItem: Transaction,
+            newItem: Transaction
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: TransactionModel,
-            newItem: TransactionModel
+            oldItem: Transaction,
+            newItem: Transaction
         ): Boolean {
             return oldItem == newItem
         }

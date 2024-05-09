@@ -69,12 +69,13 @@
                         android:layout_marginStart="10dp"
                         tools:listitem="@layout/top_crypto_items"/>
                     <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/topCircular"
+                        android:id="@+id/circular"
                         android:layout_width="40dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
                         app:lottie_autoPlay="true"
                         app:lottie_loop="true"
+                        android:visibility="gone"
                         app:lottie_rawRes="@raw/assistagro_loading_bars" />
                 </FrameLayout>
                 <com.google.android.material.tabs.TabLayout

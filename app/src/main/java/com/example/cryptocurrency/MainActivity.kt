@@ -13,24 +13,24 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.cryptocurrency.databinding.ActivityMainBinding
-import com.example.cryptocurrency.databinding.FragmentSplashBinding
+import com.example.cryptocurrency.presentation.view_models.BlockSpanViewModel
+import com.example.cryptocurrency.presentation.view_models.CryptoNewsViewModel
+import com.example.cryptocurrency.presentation.view_models.CryptoViewModel
 import com.example.cryptocurrency.utils.showToast
-import com.example.cryptocurrency.view_model.CryptoViewModel
-import com.example.cryptocurrency.view_model.PortfolioViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var splashBinding: FragmentSplashBinding
+//    private lateinit var splashBinding: FragmentSplashBinding
     private var backPressed: Long = 0
     private val viewModel: CryptoViewModel by viewModels()
-    private val portfolioViewModel: PortfolioViewModel by viewModels()
-    private val geckoViewModel: PortfolioViewModel by viewModels()
+    private val cryptoNewsViewModel: CryptoNewsViewModel by viewModels()
+    private val blockSpanViewModel: BlockSpanViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        splashBinding = FragmentSplashBinding.inflate(layoutInflater)
+//        splashBinding = FragmentSplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navController = findNavController(R.id.nav_host_fragment)
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        showSplash(navController = navController)
+//        showSplash(navController = navController)
 
     }
 
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             navController.popBackStack()
             navController.navigate(R.id.nav_home)
         }, 5000)
-        splashBinding.splashLottie.visibility = View.GONE
+//        splashBinding.splashLottie.visibility = View.GONE
     }
 
     @Deprecated("Deprecated in Java")

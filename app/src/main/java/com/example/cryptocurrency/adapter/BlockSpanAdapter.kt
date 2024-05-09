@@ -2,18 +2,16 @@ package com.example.cryptocurrency.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.BlockNftItemBinding
-import com.example.cryptocurrency.model.model4.Result
-import com.example.cryptocurrency.model.model4.Stats
-import com.example.cryptocurrency.utils.loadImage
+import com.example.cryptocurrency.domain.model.BlockSpanResult
+import com.example.cryptocurrency.domain.model.BlockSpanStats
 
-class BlockSpanAdapter(private val onItemClick: ((Result, Stats) -> Unit)?) :
+class BlockSpanAdapter(private val onItemClick: ((BlockSpanResult?, BlockSpanStats?) -> Unit)?) :
     RecyclerView.Adapter<BlockSpanAdapter.BlockSpanViewHolder>() {
 
     lateinit var binding: BlockNftItemBinding
@@ -21,12 +19,12 @@ class BlockSpanAdapter(private val onItemClick: ((Result, Stats) -> Unit)?) :
     class BlockSpanViewHolder(val binding: BlockNftItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(result: Result) {
+        fun bind(result: BlockSpanResult?) {
             binding.nft = result
             binding.executePendingBindings()
         }
 
-        fun bindData(stat: Stats) {
+        fun bindData(stat: BlockSpanStats?) {
             binding.stat = stat
             binding.executePendingBindings()
         }
@@ -35,22 +33,22 @@ class BlockSpanAdapter(private val onItemClick: ((Result, Stats) -> Unit)?) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlockSpanViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        binding = DataBindingUtil.inflate(inflater, R.layout.block_nft_item, parent, false)
+        val binding = BlockNftItemBinding.inflate(inflater,parent,false)
         return BlockSpanViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: BlockSpanViewHolder, position: Int) {
         val nft = differ.currentList[position]
         val context = holder.itemView.context
-        holder.bind(nft)
-        holder.bindData(nft.stats)
+        nft?.let(holder::bind)
+        nft?.stats?.let(holder::bindData)
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(nft, nft.stats)
         }
 
-        Glide.with(context).load(nft.image_url).placeholder(R.drawable.nft1)
+        Glide.with(context).load(nft.imageUrl).placeholder(R.drawable.nft1)
             .into(holder.binding.profile)
-        Glide.with(context).load(nft.featured_image_url)
+        Glide.with(context).load(nft.featuredImageUrl)
             .placeholder(R.drawable.img_1).into(holder.binding.featurePhoto)
 
     }
@@ -59,13 +57,13 @@ class BlockSpanAdapter(private val onItemClick: ((Result, Stats) -> Unit)?) :
         return differ.currentList.size
     }
 
-    private val diffUtil = object : DiffUtil.ItemCallback<Result>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<BlockSpanResult>() {
 
-        override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
+        override fun areItemsTheSame(oldItem: BlockSpanResult, newItem: BlockSpanResult): Boolean {
             return oldItem.key == newItem.key
         }
 
-        override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+        override fun areContentsTheSame(oldItem: BlockSpanResult, newItem: BlockSpanResult): Boolean {
             return oldItem == newItem
         }
 

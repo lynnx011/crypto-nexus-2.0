@@ -29,8 +29,8 @@ fun formatDouble(view: TextView, text: Double) {
 }
 
 @BindingAdapter("formatString")
-fun formatString(view: TextView, text: Double) {
-    if (text > 0.000) {
+fun formatString(view: TextView, text: Int?) {
+    if ((text?:0) > 0) {
         view.setTextColor(ContextCompat.getColor(view.context, R.color.tangerine))
         val sub = text.toString().substring(0, text.toString().length - 2)
         view.text = sub
@@ -38,8 +38,8 @@ fun formatString(view: TextView, text: Double) {
 }
 
 @BindingAdapter("loadImage")
-fun loadImageUrl(view: ImageView, imgUrl: String) {
-    if (imgUrl.isNotEmpty()) {
+fun loadImageUrl(view: ImageView, imgUrl: String?) {
+    if (!imgUrl.isNullOrEmpty()) {
         Glide.with(view.context)
             .load("https://s2.coinmarketcap.com/static/img/coins/64x64/$imgUrl.png")
             .into(view)
@@ -47,49 +47,53 @@ fun loadImageUrl(view: ImageView, imgUrl: String) {
 }
 
 @BindingAdapter("loadImageId")
-fun loadImageId(view: ImageView, imgId: Int) {
-    Glide.with(view.context)
-        .load("https://s2.coinmarketcap.com/static/img/coins/64x64/$imgId.png")
-        .into(view)
+fun loadImageId(view: ImageView, imgId: Int?) {
+    if (imgId != null){
+        Glide.with(view.context)
+            .load("https://s2.coinmarketcap.com/static/img/coins/64x64/$imgId.png")
+            .into(view)
+    }
 }
 
 @BindingAdapter("formatText")
-fun formatText(view: TextView, text: Double) {
-    view.text = String.format("$%.4f", text)
+fun formatText(view: TextView, text: Double?) {
+    view.text = String.format("$%.4f", text?:0.0)
 }
 
 @BindingAdapter("formatTransaction")
-fun formatTransaction(view: TextView, text: Double) {
-    view.text = String.format("%.2f", text)
+fun formatTransaction(view: TextView, text: Double?) {
+    view.text = String.format("%.2f", text?:0.0)
 }
 
 @BindingAdapter("formatTransDouble")
-fun formatTransDouble(view: TextView, text: Double) {
-    view.text = String.format("$%.2f", text)
+fun formatTransDouble(view: TextView, text: Double?) {
+    view.text = String.format("$%.2f", text?:0.0)
 }
 
 @BindingAdapter("transPercent")
-fun formatTransPercent(view: TextView, text: Double) {
-    view.text = String.format("%.2f%%", text)
+fun formatTransPercent(view: TextView, text: Double?) {
+    view.text = String.format("%.2f%%", text?:0.0)
 }
 
 @BindingAdapter("formatHash")
-fun formatHash(view: TextView, text: Int) {
+fun formatHash(view: TextView, text: Int?) {
     view.text = String.format("#%.0f", text)
 }
 
 @SuppressLint("SimpleDateFormat", "SetTextI18n")
 @BindingAdapter("parseDate")
-fun parseDate(view: TextView, text: String) {
+fun parseDate(view: TextView, text: String?) {
     val dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a")
     val parseDateTime = LocalDateTime.parse(text, DateTimeFormatter.ISO_DATE_TIME)
     val outputDateTime = parseDateTime.atOffset(ZoneOffset.UTC).format(dateFormatter)
-    view.text = outputDateTime
+    view.text = outputDateTime?:""
 }
 
 @BindingAdapter("loadUrl")
-fun loadUrl(view: ImageView, url: String) {
-    Glide.with(view.context)
-        .load(url)
-        .into(view)
+fun loadUrl(view: ImageView, url: String?) {
+    if (!url.isNullOrEmpty()){
+        Glide.with(view.context)
+            .load(url)
+            .into(view)
+    }
 }

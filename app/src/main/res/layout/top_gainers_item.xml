@@ -6,10 +6,10 @@
     <data>
         <variable
             name="crypto"
-            type="com.example.cryptocurrency.model.CryptoDetails" />
+            type="com.example.cryptocurrency.domain.model.CryptoDetails" />
         <variable
-            name="crypto1"
-            type="com.example.cryptocurrency.model.USD" />
+            name="usd"
+            type="com.example.cryptocurrency.domain.model.CryptoUsd" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -100,7 +100,7 @@
                     android:fontFamily="@font/josefin_sans_regular"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    app:formatText="@{crypto1.price}" />
+                    app:formatText="@{usd.price}" />
 
                 <TextView
                     android:id="@+id/percent"

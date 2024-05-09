@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.TopGainersItemBinding
-import com.example.cryptocurrency.model.CryptoDetails
-import com.example.cryptocurrency.model.USD
+import com.example.cryptocurrency.domain.model.CryptoDetails
+import com.example.cryptocurrency.domain.model.CryptoUsd
 import com.example.cryptocurrency.utils.cryptoLogoUrl
 import com.example.cryptocurrency.utils.cryptoSparklineUrl
 import com.example.cryptocurrency.utils.setTextColor
@@ -21,24 +21,24 @@ import java.util.*
 class TopGainersAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?): RecyclerView.Adapter<TopGainersAdapter.TopGainersViewHolder>(),Filterable {
     private lateinit var binding: TopGainersItemBinding
 
-    var cryptoList = emptyList<CryptoDetails>()
-    var filteredItems = emptyList<CryptoDetails>()
+    var cryptoList = emptyList<CryptoDetails?>()
+    var filteredItems = emptyList<CryptoDetails?>()
     @SuppressLint("NotifyDataSetChanged")
-    fun updateFilteredItem(items: List<CryptoDetails>){
-        cryptoList = items
-        filteredItems = items
+    fun updateFilteredItem(items: List<CryptoDetails?>?){
+        cryptoList = items ?: emptyList()
+        filteredItems = items ?: emptyList()
         differ.submitList(items)
         notifyDataSetChanged()
     }
 
     class TopGainersViewHolder(val binding: TopGainersItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(crypto: CryptoDetails){
+        fun bind(crypto: CryptoDetails?){
             binding.crypto = crypto
             binding.executePendingBindings()
         }
 
-        fun bindData(data: USD){
-            binding.crypto1 = data
+        fun bindData(data: CryptoUsd?){
+            binding.usd = data
             binding.executePendingBindings()
         }
     }
@@ -53,9 +53,9 @@ class TopGainersAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?): Re
     override fun onBindViewHolder(holder: TopGainersViewHolder, position: Int) {
         val cryptos = differ.currentList[position]
         val context = holder.itemView.context
-        val change24h = cryptos.quote.USD.percent_change_24h
+        val change24h = cryptos.quote?.usd?.percentChange24h
         holder.bind(cryptos)
-        holder.bindData(cryptos.quote.USD)
+        holder.bindData(cryptos.quote?.usd)
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(cryptos)
         }
@@ -70,14 +70,14 @@ class TopGainersAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?): Re
             .thumbnail(Glide.with(context).load(R.drawable.more))
             .into(holder.binding.currencyChart)
 
-        if ( change24h > 0.000) {
+        if ( (change24h?:0.0) > 0.000) {
             holder.binding.percent.setTextColor(
                 context,
                 R.color.green
             )
             holder.binding.percent.text = String.format("+%.2f%%", change24h)
         }
-        if (change24h < 0) {
+        if ((change24h?:0.0) < 0) {
             holder.binding.percent.setTextColor(
                 context,
                 R.color.chili
@@ -109,8 +109,8 @@ class TopGainersAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?): Re
                 val queryText = query.toString().trim().lowercase(Locale.getDefault())
                 filteredItems = if (query!!.isNotEmpty()) {
                     cryptoList.filter { crypto ->
-                        crypto.symbol.lowercase(Locale.getDefault()).contains(queryText) || crypto.name.lowercase(
-                            Locale.getDefault()).contains(queryText)
+                        crypto?.symbol?.lowercase(Locale.getDefault())?.contains(queryText) == true || crypto?.name?.lowercase(
+                            Locale.getDefault())?.contains(queryText) == true
                     }
                 } else {
                     cryptoList

@@ -5,10 +5,10 @@ import android.content.DialogInterface
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptocurrency.adapter.TransactionRoomAdapter
-import com.example.cryptocurrency.view_model.CryptoViewModel
-import com.example.cryptocurrency.view_model.PortfolioViewModel
+//import com.example.cryptocurrency.view_model.CryptoViewModel
+//import com.example.cryptocurrency.view_model.PortfolioViewModel
 
-class SwipeToDeleteCallback(val context: Context,private val viewModel: PortfolioViewModel,private val adapter: TransactionRoomAdapter) : ItemTouchHelper.Callback() {
+class SwipeToDeleteCallback(private val adapter: TransactionRoomAdapter) : ItemTouchHelper.Callback() {
     override fun getMovementFlags(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
@@ -51,7 +51,7 @@ class SwipeToDeleteCallback(val context: Context,private val viewModel: Portfoli
 //        alertDialog.setPositiveButton("Delete",clickListener)
 //        alertDialog.setNegativeButton("Cancel",clickListener)
 //        alertDialog.show()
-        viewModel.deleteTransaction(transaction)
+//        viewModel.deleteTransaction(transaction)
     }
 
     override fun isItemViewSwipeEnabled(): Boolean {

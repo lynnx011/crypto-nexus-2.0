@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.TransactionItemBinding
-import com.example.cryptocurrency.model.CryptoDetails
-import com.example.cryptocurrency.model.USD
+import com.example.cryptocurrency.domain.model.CryptoDetails
+import com.example.cryptocurrency.domain.model.CryptoUsd
 import java.util.*
 
 class TransactionAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?) : RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>(),Filterable {
@@ -30,13 +30,13 @@ class TransactionAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?) : 
     }
 
     class TransactionViewHolder(val binding: TransactionItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bindName(crypto: CryptoDetails){
-            binding.crypto = crypto
+        fun bindName(crypto: CryptoDetails?){
+            binding.detail = crypto
             binding.executePendingBindings()
         }
 
-        fun bindSymbol(crypto: USD){
-            binding.crypto1 = crypto
+        fun bindSymbol(crypto: CryptoUsd?){
+            binding.usd = crypto
             binding.executePendingBindings()
         }
 
@@ -52,7 +52,7 @@ class TransactionAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?) : 
         val cryptos = differ.currentList[position]
         holder.apply {
             bindName(cryptos)
-            bindSymbol(cryptos.quote.USD)
+            bindSymbol(cryptos.quote?.usd)
             itemView.setOnClickListener {
                 onItemClick?.invoke(cryptos)
             }
@@ -83,8 +83,8 @@ class TransactionAdapter(private val onItemClick: ((CryptoDetails) -> Unit)?) : 
                 val query = text.toString().trim().lowercase(Locale.getDefault())
                 filteredList = if (query.isNotEmpty()){
                     cryptoList.filter { crypto ->
-                        crypto.symbol.lowercase(Locale.getDefault()).contains(query) ||
-                                crypto.name.lowercase(Locale.getDefault()).contains(query)
+                        crypto.symbol?.lowercase(Locale.getDefault())?.contains(query) == true ||
+                                crypto.name?.lowercase(Locale.getDefault())?.contains(query) == true
                     }
                 }
                 else{

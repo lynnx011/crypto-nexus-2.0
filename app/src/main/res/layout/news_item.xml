@@ -5,7 +5,7 @@
     <data>
         <variable
             name="news"
-            type="com.example.cryptocurrency.model.model5.Article" />
+            type="com.example.cryptocurrency.domain.model.NftArticle" />
     </data>
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"

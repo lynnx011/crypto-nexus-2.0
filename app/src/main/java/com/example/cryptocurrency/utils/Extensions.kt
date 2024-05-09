@@ -73,7 +73,7 @@ fun Button.setBtnBackground(context: Context, @ColorRes res: Int) = this.setBack
     )
 )
 
-fun ImageView.loadImg(context: Context, url: String) =
+fun ImageView.loadImg(context: Context, url: String?) =
     Glide.with(context).load(url).into(this)
 
 fun Fragment.loopAndWork(work: () -> Unit, millisSec: Long) {
@@ -83,3 +83,16 @@ fun Fragment.loopAndWork(work: () -> Unit, millisSec: Long) {
 fun cryptoLogoUrl(id: Int?) : String = "https://s2.coinmarketcap.com/static/img/coins/64x64/$id.png"
 
 fun cryptoSparklineUrl(id: Int?) : String = "https://s3.coinmarketcap.com/generated/sparklines/web/1d/usd/$id.png"
+
+//fun ImageView.loadWithCoil(
+//    data: Any?,
+//    imageLoader: ImageLoader = context.imageLoader,
+//    builder: ImageRequest.Builder.() -> Unit = {}
+//): Disposable {
+//    val request = ImageRequest.Builder(context)
+//        .data(data)
+//        .target(this)
+//        .apply(builder)
+//        .build()
+//    return imageLoader.enqueue(request)
+//}

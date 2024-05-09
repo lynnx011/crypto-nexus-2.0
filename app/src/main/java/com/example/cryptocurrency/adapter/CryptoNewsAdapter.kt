@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.NewsItemBinding
-import com.example.cryptocurrency.model.model5.Article
+import com.example.cryptocurrency.domain.model.NftArticle
 import com.example.cryptocurrency.utils.loadImg
 
-class CryptoNewsAdapter : RecyclerView.Adapter<CryptoNewsAdapter.CryptoNewsViewHolder>() {
+class CryptoNewsAdapter(private val onItemClick: ((NftArticle) -> Unit)?) :
+    RecyclerView.Adapter<CryptoNewsAdapter.CryptoNewsViewHolder>() {
 
     private lateinit var binding: NewsItemBinding
-    var onItemClick: ((Article) -> Unit)? = null
 
     class CryptoNewsViewHolder(val binding: NewsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(news: Article) {
+        fun bindData(news: NftArticle) {
             binding.news = news
             binding.executePendingBindings()
         }
@@ -34,9 +34,9 @@ class CryptoNewsAdapter : RecyclerView.Adapter<CryptoNewsAdapter.CryptoNewsViewH
         val news = differ.currentList[position]
         val context = holder.itemView.context
         holder.bindData(news)
-        binding.thumbnail.loadImg(context, news.urlToImage)
+        binding.thumbnail.loadImg(context, news.urlToImage.orEmpty())
         holder.itemView.setOnClickListener {
-            onItemClick?.invoke(news)
+            news?.let(holder::bindData)
         }
     }
 
@@ -44,13 +44,13 @@ class CryptoNewsAdapter : RecyclerView.Adapter<CryptoNewsAdapter.CryptoNewsViewH
         return differ.currentList.size
     }
 
-    private val diffUtil = object : DiffUtil.ItemCallback<Article>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<NftArticle>() {
 
-        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+        override fun areItemsTheSame(oldItem: NftArticle, newItem: NftArticle): Boolean {
             return oldItem.author == newItem.author
         }
 
-        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+        override fun areContentsTheSame(oldItem: NftArticle, newItem: NftArticle): Boolean {
             return oldItem == newItem
         }
 
